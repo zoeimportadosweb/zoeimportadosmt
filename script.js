@@ -1,187 +1,376 @@
-const WHATSAPP_NUMBER = "5566992358200";
-const PIX_DISCOUNT = 0.15;
+const WHATSAPP_NUMBER = "5566992358200"; // altere se precisar
 
-const money = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const HERO_IMAGES = [
+  { src: "assets/arte-perfil-novo.jpg", alt: "Zoe Importados MT - Perfil novo do Instagram" },
+  { src: "assets/arte-smartwatch.jpg", alt: "Oferta Smartwatch" }
+];
 
-let PRODUCTS = [];
-let cart = JSON.parse(localStorage.getItem("zoe_cart") || "{}"); // id -> qty
+let products = [];
+let cart = {}; // { productId: qty }
+let heroIndex = 0;
 
-const $ = (id) => document.getElementById(id);
+const money = (v) => (v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-function saveCart(){ localStorage.setItem("zoe_cart", JSON.stringify(cart)); }
-function cartCount(){ return Object.values(cart).reduce((a,b)=>a+b,0); }
+function el(id){ return document.getElementById(id); }
 
-function cartTotals(){
-  let total = 0;
-  for (const [id, qty] of Object.entries(cart)){
-    const p = PRODUCTS.find(x => x.id === id);
-    if (!p) continue;
-    total += p.price * qty;
+function getDiscountFlags(){
+  return {
+    driver: el("discountDriver")?.checked || false,
+    student: el("discountStudent")?.checked || false
+  };
+}
+
+function getFrete(){
+  const km = parseFloat(el("km")?.value || "0") || 0;
+  return Math.max(0, km) * 1.5;
+}
+
+function productMatchesFilters(p){
+  const q = (el("search")?.value || "").trim().toLowerCase();
+  const cat = el("categoryFilter")?.value || "all";
+  const inCat = (cat === "all") ? true : p.category === cat;
+  const inQ = !q ? true : (p.name + " " + (p.desc || "")).toLowerCase().includes(q);
+  return inCat && inQ;
+}
+
+function buildCategoryFilter(){
+  const sel = el("categoryFilter");
+  const cats = Array.from(new Set(products.map(p => p.category))).sort();
+  sel.innerHTML = '<option value="all">Todas as categorias</option>' +
+    cats.map(c => `<option value="${c}">${prettyCategory(c)}</option>`).join("");
+}
+
+function prettyCategory(c){
+  const map = {
+    "relogios":"Relógios",
+    "mochilas":"Mochilas",
+    "som":"Som & Fones",
+    "casa":"Casa & Decoração",
+    "seguranca":"Segurança",
+    "iluminacao":"Iluminação",
+    "moda":"Moda",
+    "diversos":"Diversos"
+  };
+  return map[c] || (c.charAt(0).toUpperCase() + c.slice(1));
+}
+
+function renderProducts(){
+  const wrap = el("products");
+  wrap.innerHTML = "";
+  const filtered = products.filter(productMatchesFilters);
+
+  if (!filtered.length){
+    wrap.innerHTML = '<div class="notice__card" style="grid-column:1/-1"><p>Nenhum produto encontrado.</p></div>';
+    return;
   }
-  const pix = total * (1 - PIX_DISCOUNT);
-  return { total, pix };
-}
 
-function openCart(){
-  $("overlay").classList.remove("hidden");
-  $("drawer").classList.remove("hidden");
-  renderCart();
-}
+  filtered.forEach(p => {
+    const qty = cart[p.id] || 0;
+    const hasOld = typeof p.oldPrice === "number" && p.oldPrice > p.price;
+    const img0 = (p.images && p.images[0]) ? p.images[0] : "";
 
-function closeCart(){
-  $("overlay").classList.add("hidden");
-  $("drawer").classList.add("hidden");
-}
-
-function setFilter(cat){
-  document.querySelectorAll(".chip").forEach(b=>b.classList.toggle("active", b.dataset.cat===cat));
-  renderCatalog(cat);
-  document.getElementById("produtos").scrollIntoView({behavior:"smooth"});
-}
-
-function addToCart(id, qty=1){
-  cart[id] = (cart[id] || 0) + qty;
-  if (cart[id] <= 0) delete cart[id];
-  saveCart();
-  $("cartCount").innerText = cartCount();
-  renderCart();
-}
-
-function renderHighlights(){
-  const el = $("highlights");
-  el.innerHTML = "";
-  const picks = PRODUCTS.slice(0, 4);
-  picks.forEach(p=>{
-    el.appendChild(productCard(p, true));
-  });
-}
-
-function productCard(p, compact=false){
-  const card = document.createElement("div");
-  card.className = "card";
-  card.innerHTML = `
-    <img src="${p.image}" alt="${p.name}">
-    <div class="cardBody">
-      <div class="cardTop">
-        <h4>${p.name}</h4>
-        <span class="tag">${p.tag || "Pronta entrega"}</span>
+    const card = document.createElement("div");
+    card.className = "product";
+    card.innerHTML = `
+      <div class="product__media">
+        <img src="${img0}" alt="${escapeHtml(p.name)}" data-pid="${p.id}" data-imgidx="0" />
+        ${p.tag ? `<div class="product__tag">${escapeHtml(p.tag)}</div>` : ""}
+        ${p.images && p.images.length > 1 ? `
+          <div class="product__carousel">
+            <button type="button" data-action="prevImg" data-pid="${p.id}">‹</button>
+            <button type="button" data-action="nextImg" data-pid="${p.id}">›</button>
+          </div>` : ""}
       </div>
-      <p class="desc">${p.desc || ""}</p>
-      <div class="priceRow">
-        <div>
-          <span class="price">${money(p.price)}</span>
-          ${p.old ? `<span class="old">${money(p.old)}</span>` : ""}
+      <div class="product__body">
+        <h3 class="product__title">${escapeHtml(p.name)}</h3>
+        ${p.desc ? `<p class="product__desc">${escapeHtml(p.desc)}</p>` : ""}
+        <div class="price">
+          <div class="price__now">${money(p.price)}</div>
+          ${hasOld ? `<div class="price__old">${money(p.oldPrice)}</div>` : ""}
         </div>
-        <span class="tag">Pix: ${Math.round(PIX_DISCOUNT*100)}% OFF</span>
+        <div class="product__actions">
+          <button class="btn btn--primary" data-action="add" data-pid="${p.id}">Adicionar</button>
+          <div class="qty">
+            <button class="btn" data-action="dec" data-pid="${p.id}">-</button>
+            <strong>${qty}</strong>
+            <button class="btn" data-action="inc" data-pid="${p.id}">+</button>
+          </div>
+        </div>
       </div>
-      <button class="addBtn">Adicionar ao carrinho</button>
-    </div>
-  `;
-  card.querySelector(".addBtn").addEventListener("click", ()=>{
-    addToCart(p.id, 1);
-    openCart();
+    `;
+    wrap.appendChild(card);
   });
-  return card;
-}
-
-function renderCatalog(cat="todos"){
-  const el = $("catalog");
-  el.innerHTML = "";
-  const items = (cat==="todos") ? PRODUCTS : PRODUCTS.filter(p=>p.category===cat);
-  items.forEach(p=> el.appendChild(productCard(p)));
 }
 
 function renderCart(){
-  $("cartCount").innerText = cartCount();
-  const list = $("cartList");
-  list.innerHTML = "";
-  const entries = Object.entries(cart);
+  const wrap = el("cartItems");
+  const entries = Object.entries(cart).filter(([,q]) => q > 0);
 
-  if (entries.length === 0){
-    $("cartEmpty").style.display = "block";
-    list.style.display = "none";
-  } else {
-    $("cartEmpty").style.display = "none";
-    list.style.display = "flex";
-
-    entries.forEach(([id, qty])=>{
-      const p = PRODUCTS.find(x=>x.id===id);
-      if (!p) return;
-      const row = document.createElement("div");
-      row.className = "cartItem";
-      row.innerHTML = `
-        <img src="${p.image}" alt="${p.name}">
-        <div class="cartInfo">
-          <strong>${p.name}</strong>
-          <span>${money(p.price)} • Pix: ${money(p.price*(1-PIX_DISCOUNT))}</span>
-          <div class="qty">
-            <button class="minus">−</button>
-            <b>${qty}</b>
-            <button class="plus">+</button>
-            <button class="remove" title="Remover">🗑️</button>
-          </div>
-        </div>
-      `;
-      row.querySelector(".minus").addEventListener("click", ()=> addToCart(id, -1));
-      row.querySelector(".plus").addEventListener("click", ()=> addToCart(id, 1));
-      row.querySelector(".remove").addEventListener("click", ()=> { delete cart[id]; saveCart(); renderCart(); });
-      list.appendChild(row);
-    });
+  if (!entries.length){
+    wrap.innerHTML = "<p class='muted'>Seu carrinho está vazio.</p>";
+    updateTotals();
+    return;
   }
 
-  const { total, pix } = cartTotals();
-  $("total").innerText = money(total);
-  $("totalPix").innerText = money(pix);
+  wrap.innerHTML = "";
+  for (const [pid, qty] of entries){
+    const p = products.find(x => x.id === pid);
+    if (!p) continue;
+
+    const line = document.createElement("div");
+    line.className = "cartitem";
+    line.innerHTML = `
+      <div class="cartitem__left">
+        <div class="cartitem__name">${escapeHtml(p.name)}</div>
+        <div class="cartitem__meta">${qty} × ${money(p.price)}</div>
+      </div>
+      <div class="cartitem__right">
+        <div><strong>${money(p.price * qty)}</strong></div>
+        <div class="cartitem__controls">
+          <button class="btn" data-action="cartDec" data-pid="${pid}">-</button>
+          <button class="btn" data-action="cartInc" data-pid="${pid}">+</button>
+          <button class="btn" data-action="remove" data-pid="${pid}">🗑️</button>
+        </div>
+      </div>
+    `;
+    wrap.appendChild(line);
+  }
+
+  updateTotals();
 }
 
-function whatsappLink(){
-  const { total, pix } = cartTotals();
-  let msg = "Olá! Vim pelo site da ZOE IMPORTADOS MT.%0A%0A🛒 Meu carrinho:%0A";
-  for (const [id, qty] of Object.entries(cart)){
-    const p = PRODUCTS.find(x=>x.id===id);
+function calcTotals(){
+  const flags = getDiscountFlags();
+  const frete = getFrete();
+
+  let subtotal = 0;
+  let discountValue = 0;
+
+  for (const [pid, qty] of Object.entries(cart)){
+    if (qty <= 0) continue;
+    const p = products.find(x => x.id === pid);
     if (!p) continue;
-    msg += `• ${p.name} (x${qty}) — ${money(p.price)}%0A`;
+
+    const line = p.price * qty;
+    subtotal += line;
+
+    // descontos:
+    // motorista: 20% total
+    // estudante: 40% apenas em mochilas e fones
+    const eligibleStudent = (p.category === "mochilas" || (p.name || "").toLowerCase().includes("fone"));
+    const discDriver = flags.driver ? 0.20 : 0;
+    const discStudent = (flags.student && eligibleStudent) ? 0.40 : 0;
+
+    const bestDisc = Math.max(discDriver, discStudent);
+    discountValue += line * bestDisc;
   }
-  msg += `%0A💰 Total: ${money(total)}%0A💸 Total no Pix (15% OFF): ${money(pix)}%0A%0A📍 Retirada/entrega: Sinop‑MT`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(decodeURIComponent(msg))}`;
+
+  const total = Math.max(0, subtotal - discountValue) + frete;
+  const pixTotal = total * 0.85;
+
+  return { subtotal, discountValue, frete, total, pixTotal };
+}
+
+function updateTotals(){
+  const t = calcTotals();
+  el("freteValue").textContent = money(t.frete);
+  el("freteTotal").textContent = money(t.frete);
+  el("subtotal").textContent = money(t.subtotal);
+  el("discounts").textContent = "- " + money(t.discountValue);
+  el("total").textContent = money(t.total);
+  el("pixTotal").textContent = money(t.pixTotal);
+}
+
+function addToCart(pid, delta=1){
+  cart[pid] = (cart[pid] || 0) + delta;
+  if (cart[pid] < 0) cart[pid] = 0;
+  renderProducts();
+  renderCart();
+  saveCart();
+}
+
+function removeFromCart(pid){
+  delete cart[pid];
+  renderProducts();
+  renderCart();
+  saveCart();
+}
+
+function saveCart(){
+  try{ localStorage.setItem("zoe_cart", JSON.stringify(cart)); }catch(e){}
+}
+function loadCart(){
+  try{
+    const raw = localStorage.getItem("zoe_cart");
+    if (raw) cart = JSON.parse(raw) || {};
+  }catch(e){ cart = {}; }
+}
+
+function escapeHtml(str){
+  return String(str || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function rotateHero(next=true){
+  heroIndex = (heroIndex + (next ? 1 : -1) + HERO_IMAGES.length) % HERO_IMAGES.length;
+  const img = el("heroImg");
+  img.src = HERO_IMAGES[heroIndex].src;
+  img.alt = HERO_IMAGES[heroIndex].alt;
+  updateHeroDots();
+}
+
+function updateHeroDots(){
+  const dots = el("heroDots");
+  dots.innerHTML = "";
+  HERO_IMAGES.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-current", i === heroIndex ? "true" : "false");
+    b.addEventListener("click", () => { heroIndex = i; rotateHero(true); });
+    dots.appendChild(b);
+  });
+}
+
+function cycleProductImage(pid, dir){
+  const img = document.querySelector(`img[data-pid="${pid}"]`);
+  if (!img) return;
+  const p = products.find(x => x.id === pid);
+  if (!p || !p.images || p.images.length < 2) return;
+
+  let idx = parseInt(img.dataset.imgidx || "0", 10) || 0;
+  idx = (idx + dir + p.images.length) % p.images.length;
+  img.dataset.imgidx = String(idx);
+  img.src = p.images[idx];
+}
+
+function buildWhatsAppMessage(){
+  const entries = Object.entries(cart).filter(([,q]) => q > 0);
+  if (!entries.length) return null;
+
+  const flags = getDiscountFlags();
+  const address = (el("address")?.value || "").trim();
+  const km = parseFloat(el("km")?.value || "0") || 0;
+
+  const t = calcTotals();
+
+  const lines = [];
+  lines.push("🛒 *Pedido - ZOE IMPORTADOS MT*");
+  lines.push("");
+  lines.push("*Itens:*");
+
+  for (const [pid, qty] of entries){
+    const p = products.find(x => x.id === pid);
+    if (!p) continue;
+    lines.push(`• ${qty}x ${p.name} - ${money(p.price * qty)}`);
+  }
+
+  lines.push("");
+  lines.push(`Subtotal: ${money(t.subtotal)}`);
+  lines.push(`Descontos: -${money(t.discountValue)}`);
+
+  if (address) lines.push(`Endereço: ${address}`);
+  if (km > 0) lines.push(`Distância: ${km} km`);
+  lines.push(`Frete: ${money(t.frete)}`);
+  lines.push(`*Total: ${money(t.total)}*`);
+  lines.push(`*Total no Pix (15% OFF): ${money(t.pixTotal)}*`);
+
+  lines.push("");
+  lines.push("*Descontos marcados:*");
+  lines.push(`• Motorista de app: ${flags.driver ? "SIM" : "NÃO"}`);
+  lines.push(`• Estudante: ${flags.student ? "SIM" : "NÃO"}`);
+
+  lines.push("");
+  lines.push("*Pagamento:*");
+  lines.push("• Pix (15% OFF): CNPJ 38.052.604/0001-54 (QR Code no site – definir valor no app)");
+  lines.push("• Cartão de crédito: consulte no atendimento");
+  lines.push("");
+  lines.push("✅ Para finalizar, confirme este pedido e informe a forma de pagamento. Após pagar, envie o comprovante com a mensagem: *COMPRA FINALIZADA*.");
+
+  return lines.join("\n");
+}
+
+function bindEvents(){
+  document.body.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-action]");
+    if (!btn) return;
+    const act = btn.dataset.action;
+    const pid = btn.dataset.pid;
+
+    if (act === "add" || act === "inc") addToCart(pid, 1);
+    if (act === "dec") addToCart(pid, -1);
+
+    if (act === "cartInc") addToCart(pid, 1);
+    if (act === "cartDec") addToCart(pid, -1);
+    if (act === "remove") removeFromCart(pid);
+
+    if (act === "prevImg") cycleProductImage(pid, -1);
+    if (act === "nextImg") cycleProductImage(pid, +1);
+  });
+
+  ["search","categoryFilter","discountDriver","discountStudent","km","address"].forEach(id => {
+    const x = el(id);
+    if (!x) return;
+    x.addEventListener("input", () => {
+      renderProducts();
+      renderCart();
+      updateTotals();
+    });
+    x.addEventListener("change", () => {
+      renderProducts();
+      renderCart();
+      updateTotals();
+    });
+  });
+
+  el("whatsBtn").addEventListener("click", () => {
+    const msg = buildWhatsAppMessage();
+    if (!msg){
+      alert("Seu carrinho está vazio.");
+      return;
+    }
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
+  });
+
+  el("copyPix").addEventListener("click", async () => {
+    const key = el("pixKey").textContent.trim();
+    try{
+      await navigator.clipboard.writeText(key);
+      el("copyPix").textContent = "Copiado ✅";
+      setTimeout(() => el("copyPix").textContent = "Copiar chave Pix", 1500);
+    }catch(e){
+      alert("Não consegui copiar automaticamente. Copie manualmente: " + key);
+    }
+  });
+
+  // hero
+  el("heroPrev").addEventListener("click", () => rotateHero(false));
+  el("heroNext").addEventListener("click", () => rotateHero(true));
 }
 
 async function init(){
-  $("year").innerText = new Date().getFullYear();
+  el("year").textContent = String(new Date().getFullYear());
 
-  // Whats buttons
-  const baseMsg = "Olá! Quero comprar na ZOE IMPORTADOS MT. Vi pelo site.";
-  const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(baseMsg)}`;
-  $("whatsTop").href = link;
+  // hero dots
+  updateHeroDots();
 
-  // Load products
-  const res = await fetch("products.json");
-  PRODUCTS = await res.json();
+  // products
+  const res = await fetch("products.json", { cache: "no-store" });
+  products = await res.json();
 
-  renderHighlights();
-  renderCatalog("todos");
+  loadCart();
+  buildCategoryFilter();
+  renderProducts();
   renderCart();
-
-  // Filters
-  document.querySelectorAll(".chip").forEach(btn=>{
-    btn.addEventListener("click", ()=> setFilter(btn.dataset.cat));
-  });
-
-  // Drawer events
-  $("openCart").addEventListener("click", openCart);
-  $("closeCart").addEventListener("click", closeCart);
-  $("overlay").addEventListener("click", closeCart);
-
-  $("clear").addEventListener("click", ()=>{
-    cart = {};
-    saveCart();
-    renderCart();
-  });
-
-  $("checkout").addEventListener("click", ()=>{
-    if (cartCount() === 0){ openCart(); return; }
-    window.open(whatsappLink(), "_blank");
-  });
+  updateTotals();
+  bindEvents();
 }
 
-init();
+init().catch((err) => {
+  console.error(err);
+  alert("Erro ao carregar a loja. Verifique se products.json está na raiz do repositório.");
+});

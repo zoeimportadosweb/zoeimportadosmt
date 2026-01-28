@@ -4,9 +4,11 @@
     "name": "⌚ Smartwatch M9",
     "price": 189.9,
     "category": "smartwatch",
-    "desc": "Tecnologia, estilo e praticidade no seu pulso. Monitore atividades e receba notificações.",
-    "image": "assets/smartwatch-m9.jpg",
-    "tag": "Sucesso de vendas"
+    "desc": "Tecnologia, estilo e praticidade no seu pulso. Monitore atividades, receba notificações e esteja sempre conectado!",
+    "tag": "A partir de R$ 189,90",
+    "images": [
+      "assets/smartwatch-m9.jpg"
+    ]
   },
   {
     "id": "luminaria-lua",
@@ -15,44 +17,39 @@
     "old": 89.9,
     "category": "iluminacao",
     "desc": "Decora, ilumina e umidifica o ambiente. Perfeita para quartos, salas e presentes.",
-    "image": "assets/luminaria-lua.jpg",
-    "tag": "Promoção"
+    "tag": "Promoção",
+    "images": [
+      "assets/luminaria-lua.jpg"
+    ]
   },
   {
-    "id": "mochila-usb-reforcada",
-    "name": "🎒 Mochila Reforçada com USB",
-    "price": 149.9,
-    "category": "mochilas",
-    "desc": "Reforço total para o dia a dia e entrada USB para carregar o celular.",
-    "image": "assets/mochila-usb.jpg",
-    "tag": "Resistência + USB"
+    "id": "umidificador-astronauta",
+    "name": "🚀 Umidificador Astronauta",
+    "price": 59.9,
+    "oldPrice": 129.9,
+    "category": "casa",
+    "desc": "Decoração + bem‑estar + luzes do universo no seu quarto. Mega oferta!",
+    "images": [
+      "assets/umidificador-astronauta.jpg"
+    ],
+    "tag": "MEGA OFERTA"
   },
   {
-    "id": "carregador-50w",
-    "name": "🔌 Carregador + Cabo Tipo‑C 50W Turbo (iPhone/Android)",
-    "price": 39.9,
-    "category": "acessorios",
-    "desc": "Carregamento rápido (conforme compatibilidade).",
-    "image": "assets/ph-acessorios.jpg",
-    "tag": "50W Turbo"
-  },
-  {
-    "id": "fone-ouvido",
-    "name": "🎧 Fone de Ouvido",
-    "price": 39.9,
-    "category": "som",
-    "desc": "Fone para o dia a dia. Consulte modelos e cores disponíveis.",
-    "image": "assets/fone.jpg",
-    "tag": "Pronta entrega"
-  },
-  {
-    "id": "mochila-tradicional",
-    "name": "🎒 Mochila Tradicional",
-    "price": 129.9,
-    "category": "mochilas",
-    "desc": "Mochila tradicional. Consulte cores/modelos.",
-    "image": "assets/mochila-usb.jpg",
-    "tag": "Dia a dia"
+    "id": "bones-country",
+    "name": "🧢 Bonés Country (TXC / Texas Farm)",
+    "price": 49.9,
+    "oldPrice": 89.9,
+    "category": "moda",
+    "desc": "Vários modelos disponíveis. Oferta especial!",
+    "images": [
+      "assets/bone-1.jpg",
+      "assets/bone-2.jpg",
+      "assets/bone-3.jpg",
+      "assets/bone-4.jpg",
+      "assets/bone-5.jpg",
+      "assets/bone-6.jpg"
+    ],
+    "tag": "OFERTA"
   },
   {
     "id": "mochila-usb",
@@ -60,107 +57,56 @@
     "price": 159.9,
     "category": "mochilas",
     "desc": "Entrada USB para carregar o celular. Consulte modelos.",
-    "image": "assets/mochila-usb.jpg",
-    "tag": "Com USB"
+    "tag": "Com USB",
+    "images": [
+      "assets/mochila-usb.jpg"
+    ]
   },
   {
-    "id": "mochila-feminina",
-    "name": "🎒 Mochila Feminina",
-    "price": 139.9,
-    "category": "mochilas",
-    "desc": "Mochila feminina. Consulte cores/modelos.",
-    "image": "assets/mochila-usb.jpg",
-    "tag": "Estilo"
-  },
-  {
-    "id": "caixa-som-rgb",
-    "name": "🎧 Caixa de Som RGB",
-    "price": 139.9,
-    "category": "som",
-    "desc": "Som + luzes coloridas. Consulte modelos.",
-    "image": "assets/fone.jpg",
-    "tag": "RGB"
-  },
-  {
-    "id": "camera-seguranca",
-    "name": "🛡️ Câmera de Segurança",
-    "price": 249.9,
+    "id": "camera-lampada-360",
+    "name": "📷 Câmera Lâmpada 360° (Wi‑Fi Icsee)",
+    "price": 129.9,
     "category": "seguranca",
-    "desc": "Câmera de segurança. Consulte modelos/instalação.",
-    "image": "assets/ph-seguranca.jpg",
-    "tag": "Segurança"
+    "desc": "Câmera de segurança em formato lâmpada, visão 360°, noturna e Wi‑Fi.",
+    "images": [
+      "assets/cam-lampada-1.webp",
+      "assets/cam-lampada-2.webp",
+      "assets/cam-lampada-3.webp"
+    ],
+    "tag": "NOVO"
   },
   {
-    "id": "camera-lampada",
-    "name": "🛡️ Câmera Lâmpada",
-    "price": 100.0,
-    "category": "seguranca",
-    "desc": "Câmera em formato de lâmpada. Consulte detalhes.",
-    "image": "assets/ph-seguranca.jpg",
-    "tag": "2 em 1"
-  },
-  {
-    "id": "ring-light",
-    "name": "💡 Ring Light Profissional",
-    "price": 229.9,
-    "category": "iluminacao",
-    "desc": "Iluminação para fotos/vídeos. Consulte tamanhos.",
-    "image": "assets/luminaria-lua.jpg",
-    "tag": "Profissional"
-  },
-  {
-    "id": "led-colorido",
-    "name": "💡 LED Colorido",
-    "price": 59.9,
-    "category": "iluminacao",
-    "desc": "Iluminação LED/RGB. Consulte modelos.",
-    "image": "assets/luminaria-lua.jpg",
-    "tag": "RGB"
-  },
-  {
-    "id": "pelucia",
-    "name": "🎁 Pelúcias Variadas",
+    "id": "receptor-bluetooth-p2",
+    "name": "🔊 Receptor Bluetooth P2/USB (Carro/Som)",
     "price": 29.9,
-    "category": "diversos",
-    "desc": "Pelúcias variadas. Consulte opções.",
-    "image": "assets/ph-diversos.jpg",
-    "tag": "Presentes"
+    "category": "som",
+    "desc": "Transforme seu som em Bluetooth. Entrada P2 + USB, portátil e prático.",
+    "images": [
+      "assets/bt-receptor.webp"
+    ],
+    "tag": "OFERTA"
   },
   {
-    "id": "perfume-good-girl",
-    "name": "🧴 Perfume Importado “Good Girl” (Sapatinho)",
-    "price": 129.9,
-    "category": "perfumes",
-    "desc": "Perfume importado. Consulte disponibilidade.",
-    "image": "assets/ph-perfumes.jpg",
-    "tag": "Importado"
+    "id": "fone-ouvido",
+    "name": "🎧 Fone de Ouvido",
+    "price": 39.9,
+    "category": "som",
+    "desc": "Fone para o dia a dia. Consulte modelos e cores disponíveis.",
+    "tag": "Pronta entrega",
+    "images": [
+      "assets/fone.jpg"
+    ]
   },
   {
-    "id": "chaveiros",
-    "name": "🎁 Chaveiros e Itens Decorativos",
-    "price": 19.9,
-    "category": "diversos",
-    "desc": "Pequenos itens decorativos.",
-    "image": "assets/ph-diversos.jpg",
-    "tag": "Novidades"
-  },
-  {
-    "id": "bone-country",
-    "name": "🧢 Boné Country",
-    "price": 49.9,
-    "category": "moda",
-    "desc": "Boné country. Consulte modelos.",
-    "image": "assets/ph-moda.jpg",
-    "tag": "Country"
-  },
-  {
-    "id": "relogio-pulso",
-    "name": "🕰️ Relógio de Pulso (analógico/digital)",
-    "price": 129.9,
-    "category": "relogios",
-    "desc": "Relógios de pulso. Consulte modelos.",
-    "image": "assets/ph-relogios.jpg",
-    "tag": "Variedade"
+    "id": "carregador-50w",
+    "name": "🔌 Carregador + Cabo Tipo‑C 50W Turbo (iPhone/Android)",
+    "price": 39.9,
+    "category": "acessorios",
+    "desc": "Carregamento rápido (conforme compatibilidade).",
+    "tag": "50W Turbo",
+    "images": [
+      "assets/ph-acessorios.jpg"
+    ]
   },
   {
     "id": "copo-termico",
@@ -168,7 +114,186 @@
     "price": 39.9,
     "category": "casa",
     "desc": "Copo térmico. Consulte cores.",
-    "image": "assets/ph-casa.jpg",
-    "tag": "Térmico"
+    "tag": "Térmico",
+    "images": [
+      "assets/ph-casa.jpg"
+    ]
+  },
+  {
+    "id": "chaveiros",
+    "name": "🎁 Chaveiros e Itens Decorativos",
+    "price": 19.9,
+    "category": "diversos",
+    "desc": "Pequenos itens decorativos.",
+    "tag": "Novidades",
+    "images": [
+      "assets/ph-diversos.jpg"
+    ]
+  },
+  {
+    "id": "pelucia",
+    "name": "🎁 Pelúcias Variadas",
+    "price": 29.9,
+    "category": "diversos",
+    "desc": "Pelúcias variadas. Consulte opções.",
+    "tag": "Presentes",
+    "images": [
+      "assets/ph-diversos.jpg"
+    ]
+  },
+  {
+    "id": "led-colorido",
+    "name": "💡 LED Colorido",
+    "price": 59.9,
+    "category": "iluminacao",
+    "desc": "Iluminação LED/RGB. Consulte modelos.",
+    "tag": "RGB",
+    "images": [
+      "assets/luminaria-lua.jpg"
+    ]
+  },
+  {
+    "id": "ring-light-extra-grande",
+    "name": "💡 Ring Light (Extra Grande)",
+    "price": 359.9,
+    "category": "iluminacao",
+    "desc": "Iluminação profissional para estúdio e criadores. Pronta entrega.",
+    "images": [
+      "assets/ring-light.jpg"
+    ],
+    "tag": "OFERTA"
+  },
+  {
+    "id": "ring-light-medio",
+    "name": "💡 Ring Light (Médio)",
+    "price": 250.0,
+    "category": "iluminacao",
+    "desc": "Ideal para fotos, vídeos, lives e home office. Pronta entrega.",
+    "images": [
+      "assets/ring-light.jpg"
+    ],
+    "tag": "OFERTA"
+  },
+  {
+    "id": "ring-light-pequeno",
+    "name": "💡 Ring Light (Pequeno)",
+    "price": 159.9,
+    "category": "iluminacao",
+    "desc": "Ideal para fotos, vídeos, lives e home office. Pronta entrega.",
+    "images": [
+      "assets/ring-light.jpg"
+    ],
+    "tag": "OFERTA"
+  },
+  {
+    "id": "ring-light",
+    "name": "💡 Ring Light Profissional",
+    "price": 229.9,
+    "category": "iluminacao",
+    "desc": "Iluminação para fotos/vídeos. Consulte tamanhos.",
+    "tag": "Profissional",
+    "images": [
+      "assets/luminaria-lua.jpg"
+    ]
+  },
+  {
+    "id": "mochila-feminina",
+    "name": "🎒 Mochila Feminina (Couro)",
+    "price": 99.9,
+    "category": "mochilas",
+    "desc": "Mochila feminina estilo couro. Oferta por tempo limitado!",
+    "tag": "Estilo",
+    "oldPrice": 139.9,
+    "images": [
+      "assets/mochila-feminina.jpg"
+    ]
+  },
+  {
+    "id": "mochila-usb-reforcada",
+    "name": "🎒 Mochila Reforçada com USB",
+    "price": 149.9,
+    "category": "mochilas",
+    "desc": "Reforço total para o dia a dia e entrada USB para carregar o celular.",
+    "tag": "Resistência + USB",
+    "images": [
+      "assets/mochila-usb.jpg"
+    ]
+  },
+  {
+    "id": "mochila-tradicional",
+    "name": "🎒 Mochila Tradicional",
+    "price": 129.9,
+    "category": "mochilas",
+    "desc": "Mochila tradicional. Consulte cores/modelos.",
+    "tag": "Dia a dia",
+    "images": [
+      "assets/mochila-usb.jpg"
+    ]
+  },
+  {
+    "id": "bone-country",
+    "name": "🧢 Boné Country",
+    "price": 49.9,
+    "category": "moda",
+    "desc": "Boné country. Consulte modelos.",
+    "tag": "Country",
+    "images": [
+      "assets/ph-moda.jpg"
+    ]
+  },
+  {
+    "id": "perfume-good-girl",
+    "name": "🧴 Perfume Importado “Good Girl” (Sapatinho)",
+    "price": 129.9,
+    "category": "perfumes",
+    "desc": "Perfume importado. Consulte disponibilidade.",
+    "tag": "Importado",
+    "images": [
+      "assets/ph-perfumes.jpg"
+    ]
+  },
+  {
+    "id": "relogio-pulso",
+    "name": "🕰️ Relógio de Pulso (analógico/digital)",
+    "price": 129.9,
+    "category": "relogios",
+    "desc": "Relógios de pulso. Consulte modelos.",
+    "tag": "Variedade",
+    "images": [
+      "assets/ph-relogios.jpg"
+    ]
+  },
+  {
+    "id": "camera-lampada",
+    "name": "🛡️ Câmera Lâmpada",
+    "price": 100.0,
+    "category": "seguranca",
+    "desc": "Câmera em formato de lâmpada. Consulte detalhes.",
+    "tag": "2 em 1",
+    "images": [
+      "assets/ph-seguranca.jpg"
+    ]
+  },
+  {
+    "id": "camera-seguranca",
+    "name": "🛡️ Câmera de Segurança",
+    "price": 249.9,
+    "category": "seguranca",
+    "desc": "Câmera de segurança. Consulte modelos/instalação.",
+    "tag": "Segurança",
+    "images": [
+      "assets/ph-seguranca.jpg"
+    ]
+  },
+  {
+    "id": "caixa-som-rgb",
+    "name": "🎧 Caixa de Som RGB",
+    "price": 139.9,
+    "category": "som",
+    "desc": "Som + luzes coloridas. Consulte modelos.",
+    "tag": "RGB",
+    "images": [
+      "assets/fone.jpg"
+    ]
   }
 ]
