@@ -1,32 +1,131 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>ZOE IMPORTADOS MT</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZOE IMPORTADOS MT • Loja Virtual</title>
+  <meta name="description" content="ZOE IMPORTADOS MT — importados em Sinop-MT. Smartwatches, mochilas, perfumes e muito mais. 15% OFF no Pix."/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<h1>ZOE IMPORTADOS MT</h1>
-<p>Preços fixos com 15% OFF no Pix</p>
+  <div class="topbar">
+    <div class="wrap">
+      <span>📍 Rua das Primaveras, Nº 5138 • Jardim Primaveras • Sinop‑MT</span>
+      <span class="sep">•</span>
+      <a href="tel:+5566992358200">📞 (66) 9 9235‑8200</a>
+      <span class="sep">•</span>
+      <a href="https://instagram.com/zoeimportadosmtt" target="_blank" rel="noopener">📸 @zoeimportadosmtt</a>
+    </div>
+  </div>
 
-<div class="product" data-name="Smartwatch M9" data-price="189.90">
-  <h2>Smartwatch M9</h2>
-  <p>R$ 189,90</p>
-  <button onclick="addToCart('Smartwatch M9',189.90)">Adicionar</button>
-</div>
+  <header class="header">
+    <div class="wrap headerRow">
+      <div class="brand">
+        <img class="logo" src="logo.jpg" alt="ZOE IMPORTADOS MT" />
+        <div>
+          <h1>ZOE IMPORTADOS MT</h1>
+          <p>Sua loja de importados em Mato Grosso • <strong>15% OFF no Pix</strong></p>
+        </div>
+      </div>
 
-<div class="product" data-name="Luminária Lua" data-price="59.90">
-  <h2>Luminária Lua</h2>
-  <p>R$ 59,90</p>
-  <button onclick="addToCart('Luminária Lua',59.90)">Adicionar</button>
-</div>
+      <div class="actions">
+        <span class="pill">💸 Pix: 15% OFF</span>
+        <button id="openCart" class="cartBtn">🛒 Carrinho <span id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
 
-<h3>Carrinho</h3>
-<ul id="cart"></ul>
-<p>Total: R$ <span id="total">0.00</span></p>
-<button onclick="checkout()">Finalizar no WhatsApp</button>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h2>Monte seu carrinho e finalize no WhatsApp ✅</h2>
+        <p>Preços fixos + desconto no Pix. Pronta entrega (conforme estoque).</p>
+        <div class="heroBtns">
+          <a class="btn primary" id="whatsTop" href="#" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
+          <a class="btn ghost" href="#produtos">🛍️ Ver produtos</a>
+        </div>
+      </div>
+      <div class="heroCard">
+        <h3>Destaques</h3>
+        <div id="highlights" class="grid"></div>
+      </div>
+    </section>
 
-<script src="script.js"></script>
+    <section id="produtos" class="section">
+      <div class="sectionHead">
+        <h2>Produtos</h2>
+        <p>Filtre por categoria e clique em <strong>Adicionar</strong>.</p>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="chip active" data-cat="todos">Todos</button>
+        <button class="chip" data-cat="smartwatch">Smartwatch</button>
+        <button class="chip" data-cat="mochilas">Mochilas</button>
+        <button class="chip" data-cat="perfumes">Perfumes</button>
+        <button class="chip" data-cat="som">Som</button>
+        <button class="chip" data-cat="iluminacao">Iluminação</button>
+        <button class="chip" data-cat="acessorios">Acessórios</button>
+        <button class="chip" data-cat="seguranca">Segurança</button>
+        <button class="chip" data-cat="relogios">Relógios</button>
+        <button class="chip" data-cat="moda">Moda</button>
+        <button class="chip" data-cat="casa">Casa</button>
+        <button class="chip" data-cat="diversos">Diversos</button>
+      </div>
+
+      <div id="catalog" class="catalog"></div>
+    </section>
+
+    <section class="section alt">
+      <div class="twoCol">
+        <div class="box">
+          <h3>Como comprar</h3>
+          <ol>
+            <li>Escolha os produtos e clique em <strong>Adicionar</strong></li>
+            <li>Abra o carrinho (🛒) e confira o total</li>
+            <li>Clique em <strong>Finalizar no WhatsApp</strong></li>
+          </ol>
+        </div>
+        <div class="box">
+          <h3>Atendimento</h3>
+          <p><strong>WhatsApp:</strong> (66) 9 9235‑8200</p>
+          <p><strong>Instagram:</strong> @zoeimportadosmtt</p>
+          <p><strong>Endereço:</strong> Rua das Primaveras, Nº 5138 • Jardim Primaveras</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> ZOE IMPORTADOS MT • Loja virtual com carrinho + WhatsApp</p>
+    </footer>
+  </main>
+
+  <!-- Carrinho (drawer) -->
+  <div id="overlay" class="overlay hidden"></div>
+  <aside id="drawer" class="drawer hidden" aria-label="Carrinho">
+    <div class="drawerHead">
+      <h3>Seu carrinho</h3>
+      <button id="closeCart" class="icon">✕</button>
+    </div>
+
+    <div class="drawerBody">
+      <div id="cartEmpty" class="empty">
+        <p><strong>Carrinho vazio.</strong></p>
+        <p>Adicione produtos e finalize no WhatsApp.</p>
+      </div>
+      <div id="cartList" class="cartList"></div>
+    </div>
+
+    <div class="drawerFoot">
+      <div class="totals">
+        <div><span>Total</span><strong id="total">R$ 0,00</strong></div>
+        <div><span>Total no Pix (15% OFF)</span><strong id="totalPix">R$ 0,00</strong></div>
+      </div>
+      <button id="checkout" class="btn primary full">📲 Finalizar no WhatsApp</button>
+      <button id="clear" class="btn ghost full">Limpar carrinho</button>
+      <p class="note">Valores e disponibilidade podem variar conforme estoque. Confirme no WhatsApp.</p>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "smartwatch-m9",
+    "name": "⌚ Smartwatch M9",
+    "price": 189.9,
+    "category": "smartwatch",
+    "desc": "Tecnologia, estilo e praticidade no seu pulso. Monitore atividades e receba notificações.",
+    "image": "assets/smartwatch-m9.jpg",
+    "tag": "Sucesso de vendas"
+  },
+  {
+    "id": "luminaria-lua",
+    "name": "🌕 Luminária Lua Grande + Umidificador",
+    "price": 59.9,
+    "old": 89.9,
+    "category": "iluminacao",
+    "desc": "Decora, ilumina e umidifica o ambiente. Perfeita para quartos, salas e presentes.",
+    "image": "assets/luminaria-lua.jpg",
+    "tag": "Promoção"
+  },
+  {
+    "id": "mochila-usb-reforcada",
+    "name": "🎒 Mochila Reforçada com USB",
+    "price": 149.9,
+    "category": "mochilas",
+    "desc": "Reforço total para o dia a dia e entrada USB para carregar o celular.",
+    "image": "assets/mochila-usb.jpg",
+    "tag": "Resistência + USB"
+  },
+  {
+    "id": "carregador-50w",
+    "name": "🔌 Carregador + Cabo Tipo‑C 50W Turbo (iPhone/Android)",
+    "price": 39.9,
+    "category": "acessorios",
+    "desc": "Carregamento rápido (conforme compatibilidade).",
+    "image": "assets/ph-acessorios.jpg",
+    "tag": "50W Turbo"
+  },
+  {
+    "id": "fone-ouvido",
+    "name": "🎧 Fone de Ouvido",
+    "price": 39.9,
+    "category": "som",
+    "desc": "Fone para o dia a dia. Consulte modelos e cores disponíveis.",
+    "image": "assets/fone.jpg",
+    "tag": "Pronta entrega"
+  },
+  {
+    "id": "mochila-tradicional",
+    "name": "🎒 Mochila Tradicional",
+    "price": 129.9,
+    "category": "mochilas",
+    "desc": "Mochila tradicional. Consulte cores/modelos.",
+    "image": "assets/mochila-usb.jpg",
+    "tag": "Dia a dia"
+  },
+  {
+    "id": "mochila-usb",
+    "name": "🎒 Mochila USB (entrada USB)",
+    "price": 159.9,
+    "category": "mochilas",
+    "desc": "Entrada USB para carregar o celular. Consulte modelos.",
+    "image": "assets/mochila-usb.jpg",
+    "tag": "Com USB"
+  },
+  {
+    "id": "mochila-feminina",
+    "name": "🎒 Mochila Feminina",
+    "price": 139.9,
+    "category": "mochilas",
+    "desc": "Mochila feminina. Consulte cores/modelos.",
+    "image": "assets/mochila-usb.jpg",
+    "tag": "Estilo"
+  },
+  {
+    "id": "caixa-som-rgb",
+    "name": "🎧 Caixa de Som RGB",
+    "price": 139.9,
+    "category": "som",
+    "desc": "Som + luzes coloridas. Consulte modelos.",
+    "image": "assets/fone.jpg",
+    "tag": "RGB"
+  },
+  {
+    "id": "camera-seguranca",
+    "name": "🛡️ Câmera de Segurança",
+    "price": 249.9,
+    "category": "seguranca",
+    "desc": "Câmera de segurança. Consulte modelos/instalação.",
+    "image": "assets/ph-seguranca.jpg",
+    "tag": "Segurança"
+  },
+  {
+    "id": "camera-lampada",
+    "name": "🛡️ Câmera Lâmpada",
+    "price": 100.0,
+    "category": "seguranca",
+    "desc": "Câmera em formato de lâmpada. Consulte detalhes.",
+    "image": "assets/ph-seguranca.jpg",
+    "tag": "2 em 1"
+  },
+  {
+    "id": "ring-light",
+    "name": "💡 Ring Light Profissional",
+    "price": 229.9,
+    "category": "iluminacao",
+    "desc": "Iluminação para fotos/vídeos. Consulte tamanhos.",
+    "image": "assets/luminaria-lua.jpg",
+    "tag": "Profissional"
+  },
+  {
+    "id": "led-colorido",
+    "name": "💡 LED Colorido",
+    "price": 59.9,
+    "category": "iluminacao",
+    "desc": "Iluminação LED/RGB. Consulte modelos.",
+    "image": "assets/luminaria-lua.jpg",
+    "tag": "RGB"
+  },
+  {
+    "id": "pelucia",
+    "name": "🎁 Pelúcias Variadas",
+    "price": 29.9,
+    "category": "diversos",
+    "desc": "Pelúcias variadas. Consulte opções.",
+    "image": "assets/ph-diversos.jpg",
+    "tag": "Presentes"
+  },
+  {
+    "id": "perfume-good-girl",
+    "name": "🧴 Perfume Importado “Good Girl” (Sapatinho)",
+    "price": 129.9,
+    "category": "perfumes",
+    "desc": "Perfume importado. Consulte disponibilidade.",
+    "image": "assets/ph-perfumes.jpg",
+    "tag": "Importado"
+  },
+  {
+    "id": "chaveiros",
+    "name": "🎁 Chaveiros e Itens Decorativos",
+    "price": 19.9,
+    "category": "diversos",
+    "desc": "Pequenos itens decorativos.",
+    "image": "assets/ph-diversos.jpg",
+    "tag": "Novidades"
+  },
+  {
+    "id": "bone-country",
+    "name": "🧢 Boné Country",
+    "price": 49.9,
+    "category": "moda",
+    "desc": "Boné country. Consulte modelos.",
+    "image": "assets/ph-moda.jpg",
+    "tag": "Country"
+  },
+  {
+    "id": "relogio-pulso",
+    "name": "🕰️ Relógio de Pulso (analógico/digital)",
+    "price": 129.9,
+    "category": "relogios",
+    "desc": "Relógios de pulso. Consulte modelos.",
+    "image": "assets/ph-relogios.jpg",
+    "tag": "Variedade"
+  },
+  {
+    "id": "copo-termico",
+    "name": "☕ Copo Térmico",
+    "price": 39.9,
+    "category": "casa",
+    "desc": "Copo térmico. Consulte cores.",
+    "image": "assets/ph-casa.jpg",
+    "tag": "Térmico"
+  }
+]
