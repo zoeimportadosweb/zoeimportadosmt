@@ -1,299 +1,295 @@
 [
   {
     "id": "smartwatch-m9",
-    "name": "⌚ Smartwatch M9",
+    "name": "Smartwatch M9",
     "price": 189.9,
-    "category": "smartwatch",
-    "desc": "Tecnologia, estilo e praticidade no seu pulso. Monitore atividades, receba notificações e esteja sempre conectado!",
-    "tag": "A partir de R$ 189,90",
+    "category": "relogios",
     "images": [
-      "assets/smartwatch-m9.jpg"
-    ]
+      "assets/arte-smartwatch.jpg"
+    ],
+    "description": "Tecnologia, estilo e praticidade no seu pulso."
+  },
+  {
+    "id": "relogio-digital",
+    "name": "Relógio Digital LED (Oferta)",
+    "price": 79.9,
+    "originalPrice": 129.9,
+    "category": "relogios",
+    "images": [
+      "assets/relogio-digital.jpg",
+      "assets/relogio-digital-2.webp"
+    ],
+    "description": "Relógio digital esportivo, confortável e resistente. Oferta por tempo limitado."
   },
   {
     "id": "luminaria-lua",
-    "name": "🌕 Luminária Lua Grande + Umidificador",
+    "name": "Luminária Lua",
     "price": 59.9,
-    "old": 89.9,
-    "category": "iluminacao",
-    "desc": "Decora, ilumina e umidifica o ambiente. Perfeita para quartos, salas e presentes.",
-    "tag": "Promoção",
+    "category": "decor",
     "images": [
-      "assets/luminaria-lua.jpg"
-    ]
+      "assets/lua-umidificador.jpg"
+    ],
+    "description": "Luminária temática para decorar seu ambiente."
   },
   {
     "id": "umidificador-astronauta",
-    "name": "🚀 Umidificador Astronauta",
+    "name": "Umidificador Astronauta (Mega Oferta)",
     "price": 59.9,
-    "oldPrice": 129.9,
-    "category": "casa",
-    "desc": "Decoração + bem‑estar + luzes do universo no seu quarto. Mega oferta!",
+    "originalPrice": 129.9,
+    "category": "decor",
     "images": [
-      "assets/umidificador-astronauta.jpg"
+      "assets/SaveClip.App_617398552_17858356845594529_5367524789386729616_n.jpg",
+      "assets/SaveClip.App_614582877_17858356854594529_3890824448854941767_n.jpg",
+      "assets/SaveClip.App_612407789_17858356869594529_8488093288935078756_n.jpg"
     ],
-    "tag": "MEGA OFERTA"
+    "description": "Decoração, bem-estar e luzes do universo no seu quarto!"
   },
   {
-    "id": "bones-country",
-    "name": "🧢 Bonés Country (TXC / Texas Farm)",
-    "price": 49.9,
-    "oldPrice": 89.9,
-    "category": "moda",
-    "desc": "Vários modelos disponíveis. Oferta especial!",
+    "id": "projetor-estrelas-astronauta",
+    "name": "Projetor de Estrelas Astronauta (Oferta)",
+    "price": 100.0,
+    "originalPrice": 159.9,
+    "category": "decor",
     "images": [
-      "assets/bone-1.jpg",
-      "assets/bone-2.jpg",
-      "assets/bone-3.jpg",
-      "assets/bone-4.jpg",
-      "assets/bone-5.jpg",
-      "assets/bone-6.jpg"
+      "assets/projetor-astronauta.jpg"
     ],
-    "tag": "OFERTA"
+    "description": "Projeção de estrelas e nebulosas. Perfeito para quarto, festa e relaxar."
   },
   {
-    "id": "mochila-usb",
-    "name": "🎒 Mochila USB (entrada USB)",
-    "price": 159.9,
-    "category": "mochilas",
-    "desc": "Entrada USB para carregar o celular. Consulte modelos.",
-    "tag": "Com USB",
-    "images": [
-      "assets/mochila-usb.jpg"
-    ]
-  },
-  {
-    "id": "camera-lampada-360",
-    "name": "📷 Câmera Lâmpada 360° (Wi‑Fi Icsee)",
-    "price": 129.9,
+    "id": "camera-seguranca-360",
+    "name": "Câmera de Segurança Wi‑Fi 360° (Externa/Interna)",
+    "price": 359.9,
     "category": "seguranca",
-    "desc": "Câmera de segurança em formato lâmpada, visão 360°, noturna e Wi‑Fi.",
     "images": [
-      "assets/cam-lampada-1.webp",
-      "assets/cam-lampada-2.webp",
-      "assets/cam-lampada-3.webp"
+      "assets/camera-seguranca-360.jpg"
     ],
-    "tag": "NOVO"
+    "description": "Rotação 360°, visão noturna e monitoramento pelo celular. Proteção para seu lar."
   },
   {
-    "id": "receptor-bluetooth-p2",
-    "name": "🔊 Receptor Bluetooth P2/USB (Carro/Som)",
-    "price": 29.9,
-    "category": "som",
-    "desc": "Transforme seu som em Bluetooth. Entrada P2 + USB, portátil e prático.",
+    "id": "mochila-feminina-couro",
+    "name": "Mochila Feminina Couro (Oferta)",
+    "price": 99.9,
+    "originalPrice": 139.9,
+    "category": "mochilas",
     "images": [
-      "assets/bt-receptor.webp"
+      "assets/mochila-feminina.png"
     ],
-    "tag": "OFERTA"
+    "description": "Mochila feminina estilo couro. Oferta especial."
   },
   {
     "id": "fone-ouvido",
-    "name": "🎧 Fone de Ouvido",
+    "name": "Fone de Ouvido",
     "price": 39.9,
-    "category": "som",
-    "desc": "Fone para o dia a dia. Consulte modelos e cores disponíveis.",
-    "tag": "Pronta entrega",
+    "category": "fones",
     "images": [
-      "assets/fone.jpg"
-    ]
-  },
-  {
-    "id": "carregador-50w",
-    "name": "🔌 Carregador + Cabo Tipo‑C 50W Turbo (iPhone/Android)",
-    "price": 39.9,
-    "category": "acessorios",
-    "desc": "Carregamento rápido (conforme compatibilidade).",
-    "tag": "50W Turbo",
-    "images": [
-      "assets/ph-acessorios.jpg"
-    ]
-  },
-  {
-    "id": "copo-termico",
-    "name": "☕ Copo Térmico",
-    "price": 39.9,
-    "category": "casa",
-    "desc": "Copo térmico. Consulte cores.",
-    "tag": "Térmico",
-    "images": [
-      "assets/ph-casa.jpg"
-    ]
-  },
-  {
-    "id": "chaveiros",
-    "name": "🎁 Chaveiros e Itens Decorativos",
-    "price": 19.9,
-    "category": "diversos",
-    "desc": "Pequenos itens decorativos.",
-    "tag": "Novidades",
-    "images": [
-      "assets/ph-diversos.jpg"
-    ]
-  },
-  {
-    "id": "pelucia",
-    "name": "🎁 Pelúcias Variadas",
-    "price": 29.9,
-    "category": "diversos",
-    "desc": "Pelúcias variadas. Consulte opções.",
-    "tag": "Presentes",
-    "images": [
-      "assets/ph-diversos.jpg"
-    ]
-  },
-  {
-    "id": "led-colorido",
-    "name": "💡 LED Colorido",
-    "price": 59.9,
-    "category": "iluminacao",
-    "desc": "Iluminação LED/RGB. Consulte modelos.",
-    "tag": "RGB",
-    "images": [
-      "assets/luminaria-lua.jpg"
-    ]
-  },
-  {
-    "id": "ring-light-extra-grande",
-    "name": "💡 Ring Light (Extra Grande)",
-    "price": 359.9,
-    "category": "iluminacao",
-    "desc": "Iluminação profissional para estúdio e criadores. Pronta entrega.",
-    "images": [
-      "assets/ring-light.jpg"
+      "assets/fone-ouvido.jpg"
     ],
-    "tag": "OFERTA"
-  },
-  {
-    "id": "ring-light-medio",
-    "name": "💡 Ring Light (Médio)",
-    "price": 250.0,
-    "category": "iluminacao",
-    "desc": "Ideal para fotos, vídeos, lives e home office. Pronta entrega.",
-    "images": [
-      "assets/ring-light.jpg"
-    ],
-    "tag": "OFERTA"
-  },
-  {
-    "id": "ring-light-pequeno",
-    "name": "💡 Ring Light (Pequeno)",
-    "price": 159.9,
-    "category": "iluminacao",
-    "desc": "Ideal para fotos, vídeos, lives e home office. Pronta entrega.",
-    "images": [
-      "assets/ring-light.jpg"
-    ],
-    "tag": "OFERTA"
-  },
-  {
-    "id": "ring-light",
-    "name": "💡 Ring Light Profissional",
-    "price": 229.9,
-    "category": "iluminacao",
-    "desc": "Iluminação para fotos/vídeos. Consulte tamanhos.",
-    "tag": "Profissional",
-    "images": [
-      "assets/luminaria-lua.jpg"
-    ]
-  },
-  {
-    "id": "mochila-feminina",
-    "name": "🎒 Mochila Feminina (Couro)",
-    "price": 99.9,
-    "category": "mochilas",
-    "desc": "Mochila feminina estilo couro. Oferta por tempo limitado!",
-    "tag": "Estilo",
-    "oldPrice": 139.9,
-    "images": [
-      "assets/mochila-feminina.jpg"
-    ]
-  },
-  {
-    "id": "mochila-usb-reforcada",
-    "name": "🎒 Mochila Reforçada com USB",
-    "price": 149.9,
-    "category": "mochilas",
-    "desc": "Reforço total para o dia a dia e entrada USB para carregar o celular.",
-    "tag": "Resistência + USB",
-    "images": [
-      "assets/mochila-usb.jpg"
-    ]
-  },
-  {
-    "id": "mochila-tradicional",
-    "name": "🎒 Mochila Tradicional",
-    "price": 129.9,
-    "category": "mochilas",
-    "desc": "Mochila tradicional. Consulte cores/modelos.",
-    "tag": "Dia a dia",
-    "images": [
-      "assets/mochila-usb.jpg"
-    ]
+    "description": "Fone prático para o dia a dia."
   },
   {
     "id": "bone-country",
-    "name": "🧢 Boné Country",
+    "name": "Bonés Country (TXC / Texas Farm) - Oferta",
     "price": 49.9,
-    "category": "moda",
-    "desc": "Boné country. Consulte modelos.",
-    "tag": "Country",
+    "originalPrice": 89.9,
+    "category": "acessorios",
     "images": [
-      "assets/ph-moda.jpg"
-    ]
+      "assets/bone-country.jpg"
+    ],
+    "description": "Vários modelos. Oferta limitada."
+  },
+  {
+    "id": "receptor-bluetooth-usb-p2",
+    "name": "Receptor Bluetooth USB/P2",
+    "price": 29.9,
+    "category": "acessorios",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Transforme seu som em Bluetooth. Ideal para carro e caixas de som."
+  },
+  {
+    "id": "chaveiro-stitch-3d",
+    "name": "Chaveiro Stitch 3D (6cm x 6cm)",
+    "price": 19.9,
+    "category": "chaveiros",
+    "images": [
+      "assets/chaveiro-stitch.jpg"
+    ],
+    "description": "Robusto, lindo e perfeito para chave, mochila e presente."
+  },
+  {
+    "id": "chaveiro-capivara",
+    "name": "Chaveiro Capivara",
+    "price": 19.9,
+    "category": "chaveiros",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Modelos variados. Foto em breve."
+  },
+  {
+    "id": "pelucias-diversas",
+    "name": "Pelúcias Diversas",
+    "price": 29.9,
+    "category": "pelucias",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Modelos variados. Foto em breve."
+  },
+  {
+    "id": "cartao-memoria-16gb",
+    "name": "Cartão de Memória MasterDrive 16 GB",
+    "price": 59.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/cartao-memoria-16gb.jpg"
+    ],
+    "description": "Cartão de memória com adaptador."
+  },
+  {
+    "id": "cartao-memoria-8gb",
+    "name": "Cartão de Memória MasterDrive 8 GB",
+    "price": 45.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/cartao-memoria-8gb.webp"
+    ],
+    "description": "Cartão de memória com adaptador."
+  },
+  {
+    "id": "bracelete-preto-esportivo",
+    "name": "Bracelete Preto Esportivo",
+    "price": 49.9,
+    "category": "acessorios",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Pulseira/bracelete esportivo preto."
+  },
+  {
+    "id": "carregador-tipo-c",
+    "name": "Carregador Tipo C",
+    "price": 49.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Carregador Tipo C. Foto em breve."
+  },
+  {
+    "id": "carregador-iphone",
+    "name": "Carregador iPhone",
+    "price": 59.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Carregador iPhone. Foto em breve."
+  },
+  {
+    "id": "controle-universal",
+    "name": "Controle Universal",
+    "price": 39.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Controle universal. Foto em breve."
+  },
+  {
+    "id": "powerbank-itblue-20000",
+    "name": "Power Bank It‑Blue 20.000mAh (Oferta)",
+    "price": 159.9,
+    "originalPrice": 229.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Bateria portátil para o dia a dia. Foto em breve."
+  },
+  {
+    "id": "oculos-corrida-espelhado",
+    "name": "Óculos Corrida Esportivo Espelhado (Oferta)",
+    "price": 69.9,
+    "originalPrice": 89.9,
+    "category": "acessorios",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Modelos espelhados. Foto em breve."
+  },
+  {
+    "id": "oculos-branco-espelhado",
+    "name": "Óculos Branco Esportivo Espelhado (Oferta)",
+    "price": 69.9,
+    "originalPrice": 89.9,
+    "category": "acessorios",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Detalhes brancos. Foto em breve."
   },
   {
     "id": "perfume-good-girl",
-    "name": "🧴 Perfume Importado “Good Girl” (Sapatinho)",
-    "price": 129.9,
+    "name": "Perfume Importado Good Girl",
+    "price": 199.9,
     "category": "perfumes",
-    "desc": "Perfume importado. Consulte disponibilidade.",
-    "tag": "Importado",
     "images": [
-      "assets/ph-perfumes.jpg"
-    ]
+      "assets/placeholder.png"
+    ],
+    "description": "Perfume importado. Foto em breve."
   },
   {
-    "id": "relogio-pulso",
-    "name": "🕰️ Relógio de Pulso (analógico/digital)",
-    "price": 129.9,
-    "category": "relogios",
-    "desc": "Relógios de pulso. Consulte modelos.",
-    "tag": "Variedade",
-    "images": [
-      "assets/ph-relogios.jpg"
-    ]
-  },
-  {
-    "id": "camera-lampada",
-    "name": "🛡️ Câmera Lâmpada",
-    "price": 100.0,
-    "category": "seguranca",
-    "desc": "Câmera em formato de lâmpada. Consulte detalhes.",
-    "tag": "2 em 1",
-    "images": [
-      "assets/ph-seguranca.jpg"
-    ]
-  },
-  {
-    "id": "camera-seguranca",
-    "name": "🛡️ Câmera de Segurança",
-    "price": 249.9,
-    "category": "seguranca",
-    "desc": "Câmera de segurança. Consulte modelos/instalação.",
-    "tag": "Segurança",
-    "images": [
-      "assets/ph-seguranca.jpg"
-    ]
-  },
-  {
-    "id": "caixa-som-rgb",
-    "name": "🎧 Caixa de Som RGB",
+    "id": "teclado-gamer-rgb",
+    "name": "Teclado Gamer RGB (Oferta)",
     "price": 139.9,
-    "category": "som",
-    "desc": "Som + luzes coloridas. Consulte modelos.",
-    "tag": "RGB",
+    "originalPrice": 169.9,
+    "category": "eletronicos",
     "images": [
-      "assets/fone.jpg"
-    ]
+      "assets/placeholder.png"
+    ],
+    "description": "Teclado gamer RGB. Foto em breve."
+  },
+  {
+    "id": "caixa-som-roda-azul",
+    "name": "Caixa de Som Roda Azul (Oferta)",
+    "price": 125.0,
+    "originalPrice": 159.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Caixa de som roda azul. Foto em breve."
+  },
+  {
+    "id": "ring-light-pequeno",
+    "name": "Ring Light Pequeno",
+    "price": 159.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Iluminação profissional. Foto em breve."
+  },
+  {
+    "id": "ring-light-medio",
+    "name": "Ring Light Médio",
+    "price": 250.0,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Iluminação profissional. Foto em breve."
+  },
+  {
+    "id": "ring-light-extra-grande",
+    "name": "Ring Light Extra Grande",
+    "price": 359.9,
+    "category": "eletronicos",
+    "images": [
+      "assets/placeholder.png"
+    ],
+    "description": "Iluminação profissional. Foto em breve."
   }
 ]

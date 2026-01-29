@@ -1,8 +1,8 @@
 const WHATSAPP_NUMBER = "5566992358200"; // altere se precisar
 
 const HERO_IMAGES = [
-  { src: "assets/arte-perfil-novo.jpg", alt: "Zoe Importados MT - Perfil novo do Instagram" },
-  { src: "assets/arte-smartwatch.jpg", alt: "Oferta Smartwatch" }
+  { src: "assets/arte-perfil-novo.jpg", caption: "Perfil novo do Instagram" },
+  { src: "assets/arte-smartwatch.jpg", caption: "Smartwatch a partir de R$ 189,90" }
 ];
 
 let products = [];
@@ -10,6 +10,45 @@ let cart = {}; // { productId: qty }
 let heroIndex = 0;
 
 const money = (v) => (v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+// ===== Pix (BR Code / copia e cola) =====
+function emv(id, value){
+  const v = String(value);
+  return String(id).padStart(2,"0") + String(v.length).padStart(2,"0") + v;
+}
+function crc16ccitt(str){
+  let crc = 0xFFFF;
+  for (let i=0;i<str.length;i++){
+    crc ^= (str.charCodeAt(i) << 8);
+    for (let j=0;j<8;j++){
+      if (crc & 0x8000) crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+      else crc = (crc << 1) & 0xFFFF;
+    }
+  }
+  return crc.toString(16).toUpperCase().padStart(4,"0");
+}
+function buildPixPayload({key, name, city, amount, txid="***"}){
+  const gui = emv("00","br.gov.bcb.pix");
+  const k = emv("01", key);
+  const desc = emv("02", "ZOE IMPORTADOS MT");
+  const mai = emv("26", gui + k + desc);
+
+  const payload =
+    emv("00","01") +
+    emv("01","12") +
+    mai +
+    emv("52","0000") +
+    emv("53","986") +
+    emv("54", amount.toFixed(2)) +
+    emv("58","BR") +
+    emv("59", name.substring(0,25)) +
+    emv("60", city.substring(0,15)) +
+    emv("62", emv("05", txid.substring(0,25)));
+
+  const toCrc = payload + "6304";
+  const crc = crc16ccitt(toCrc);
+  return toCrc + crc;
+}
 
 function el(id){ return document.getElementById(id); }
 
@@ -179,6 +218,8 @@ function updateTotals(){
   el("discounts").textContent = "- " + money(t.discountValue);
   el("total").textContent = money(t.total);
   el("pixTotal").textContent = money(t.pixTotal);
+
+  updatePixUI();
 }
 
 function addToCart(pid, delta=1){
@@ -352,7 +393,35 @@ function bindEvents(){
   el("heroNext").addEventListener("click", () => rotateHero(true));
 }
 
-async function init(){
+async 
+
+function updatePixUI(){
+  const qrImg = document.getElementById("pixQrImg");
+  const copia = document.getElementById("pixCopiaCola");
+  const pixKeyEl = document.getElementById("pixKey");
+  if (!qrImg || !copia || !pixKeyEl) return;
+
+  // Recalcula a partir do estado atual do carrinho
+  const subtotal = calcSubtotal(cart);
+  const freight = calcFreight();
+  const discount = calcDiscount(subtotal);
+  const total = Math.max(0, subtotal - discount) + freight;
+  const pixTotal = total * (1 - PIX_DISCOUNT);
+
+  const payload = buildPixPayload({
+    key: pixKeyEl.value.trim() || "38.052.604/0001-54",
+    name: "ZOE IMPORTADOS MT",
+    city: "SINOP",
+    amount: pixTotal,
+    txid: "ZOEIMPORTADOS"
+  });
+
+  copia.value = payload;
+  const data = encodeURIComponent(payload);
+  qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${data}`;
+}
+
+function init(){
   el("year").textContent = String(new Date().getFullYear());
 
   // hero dots
@@ -374,3 +443,20 @@ init().catch((err) => {
   console.error(err);
   alert("Erro ao carregar a loja. Verifique se products.json está na raiz do repositório.");
 });
+
+
+// Copiar Pix (copia e cola)
+const copyPixCodeBtn = document.getElementById("copyPixCodeBtn");
+if (copyPixCodeBtn){
+  copyPixCodeBtn.addEventListener("click", async () => {
+    const t = document.getElementById("pixCopiaCola")?.value || "";
+    if (!t) return;
+    try{
+      await navigator.clipboard.writeText(t);
+      alert("Pix (copia e cola) copiado!");
+    }catch(e){
+      const ta = document.getElementById("pixCopiaCola");
+      if (ta){ ta.select(); document.execCommand("copy"); alert("Pix (copia e cola) copiado!"); }
+    }
+  });
+}

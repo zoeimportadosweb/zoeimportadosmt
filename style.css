@@ -1,6 +1,6 @@
 :root{
-  --bg:#0c0d10;
-  --card:#12141a;
+  --bg: #0b3a86;
+  --card: #062651;
   --muted:#a8b0bf;
   --text:#ffffff;
   --line:rgba(255,255,255,.10);
@@ -118,3 +118,9 @@ select.input{min-width:200px}
 .footer h3{margin:0 0 8px}
 .footer p{margin:0 0 8px;color:var(--muted)}
 .footer__bottom{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);text-align:center}
+
+/* Pix QR layout */
+.pay__qrgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.pay__qrcol img{width:100%;max-width:260px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#fff}
+.pix__code{width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.12);padding:10px;background:rgba(0,0,0,.25);color:var(--text);resize:vertical}
+@media (max-width: 880px){.pay__qrgrid{grid-template-columns:1fr}}

@@ -146,8 +146,17 @@
         </div>
 
         <div class="pay__qr">
-          <img src="assets/pix-qr.jpg" alt="QR Code Pix" />
-          <p class="muted">Escaneie o QR Code e <strong>defina o valor</strong> no seu app bancário.</p>
+          <div class="pay__qrgrid">
+            <div class="pay__qrcol">
+              <img id="pixQrImg" src="assets/pix-qr-banco.jpeg" alt="QR Code Pix" />
+              <p class="muted">QR gerado para o <strong>valor total</strong> (Pix) + frete. Se o QR não carregar, use o “copia e cola”.</p>
+            </div>
+            <div class="pay__qrcol">
+              <label class="muted" for="pixCopiaCola"><strong>Pix (copia e cola)</strong></label>
+              <textarea id="pixCopiaCola" class="pix__code" rows="4" readonly></textarea>
+              <button id="copyPixCodeBtn" class="btn btn--ghost" type="button">Copiar Pix (copia e cola)</button>
+            </div>
+          </div>
         </div>
 
         <p><strong>Cartão de crédito:</strong> consulte no WhatsApp (máquina/cartão na entrega).</p>
