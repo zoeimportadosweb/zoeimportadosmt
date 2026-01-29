@@ -394,9 +394,7 @@ function bindEvents(){
   el("heroNext")?.addEventListener("click", () => rotateHero(true));
 }
 
-async 
-
-function updatePixUI(){
+async function updatePixUI(){
   const qrImg = document.getElementById("pixQrImg");
   const copia = document.getElementById("pixCopiaCola");
   const pixKeyEl = document.getElementById("pixKey");
