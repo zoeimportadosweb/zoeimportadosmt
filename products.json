@@ -63,7 +63,9 @@
     "images": [
       "assets/camera-seguranca-360.jpg"
     ],
-    "description": "Rotação 360°, visão noturna e monitoramento pelo celular. Proteção para seu lar."
+    "description": "Câmera de segurança interna e externa, rotação 360°, visão noturna. Proteção para seu lar.",
+    "promoPrice": null,
+    "tag": "PROTEÇÃO"
   },
   {
     "id": "mochila-feminina-couro",
@@ -193,74 +195,88 @@
     "price": 39.9,
     "category": "eletronicos",
     "images": [
-      "assets/placeholder.png"
+      "assets/products/controle-universal.jpg"
     ],
-    "description": "Controle universal. Foto em breve."
+    "description": "Controle universal para TV/Smart TV (vários modelos).",
+    "promoPrice": null
   },
   {
     "id": "powerbank-itblue-20000",
     "name": "Power Bank It‑Blue 20.000mAh (Oferta)",
-    "price": 159.9,
+    "price": 229.9,
     "originalPrice": 229.9,
     "category": "eletronicos",
     "images": [
-      "assets/placeholder.png"
+      "assets/products/powerbank-itblue-20000.jpg"
     ],
-    "description": "Bateria portátil para o dia a dia. Foto em breve."
+    "description": "Power bank IT‑BLUE 20.000mAh. Prático para o dia a dia.",
+    "promoPrice": 159.9,
+    "tag": "OFERTA"
   },
   {
     "id": "oculos-corrida-espelhado",
     "name": "Óculos Corrida Esportivo Espelhado (Oferta)",
-    "price": 69.9,
+    "price": 89.9,
     "originalPrice": 89.9,
     "category": "acessorios",
     "images": [
-      "assets/placeholder.png"
+      "assets/products/oculos-corrida-espelhado.jpg"
     ],
-    "description": "Modelos espelhados. Foto em breve."
+    "description": "Óculos esportivo espelhado para corrida/ciclismo.",
+    "promoPrice": 69.9,
+    "tag": "OFERTA"
   },
   {
     "id": "oculos-branco-espelhado",
     "name": "Óculos Branco Esportivo Espelhado (Oferta)",
-    "price": 69.9,
+    "price": 89.9,
     "originalPrice": 89.9,
     "category": "acessorios",
     "images": [
-      "assets/placeholder.png"
+      "assets/products/oculos-branco-espelhado.jpg"
     ],
-    "description": "Detalhes brancos. Foto em breve."
+    "description": "Óculos esportivo espelhado com detalhes brancos.",
+    "promoPrice": 69.9,
+    "tag": "OFERTA"
   },
   {
     "id": "perfume-good-girl",
     "name": "Perfume Importado Good Girl",
-    "price": 199.9,
+    "price": 129.9,
     "category": "perfumes",
     "images": [
-      "assets/placeholder.png"
+      "assets/products/perfume-good-girl-preto.jpg",
+      "assets/products/perfume-good-girl-claro.jpg"
     ],
-    "description": "Perfume importado. Foto em breve."
+    "description": "Perfume feminino importado (inspirado Good Girl). Fixação prolongada.",
+    "promoPrice": 70.0,
+    "tag": "OFERTA"
   },
   {
     "id": "teclado-gamer-rgb",
     "name": "Teclado Gamer RGB (Oferta)",
-    "price": 139.9,
+    "price": 169.9,
     "originalPrice": 169.9,
     "category": "eletronicos",
     "images": [
-      "assets/placeholder.png"
+      "assets/products/teclado-gamer-rgb.jpg"
     ],
-    "description": "Teclado gamer RGB. Foto em breve."
+    "description": "Teclado gamer single hand com iluminação RGB.",
+    "promoPrice": 139.9,
+    "tag": "OFERTA"
   },
   {
     "id": "caixa-som-roda-azul",
     "name": "Caixa de Som Roda Azul (Oferta)",
-    "price": 125.0,
+    "price": 159.9,
     "originalPrice": 159.9,
     "category": "eletronicos",
     "images": [
-      "assets/placeholder.png"
+      "assets/products/caixa-som-roda-azul.jpg"
     ],
-    "description": "Caixa de som roda azul. Foto em breve."
+    "description": "Caixa de som estilo roda (wireless). Som potente e design diferente.",
+    "promoPrice": 125.0,
+    "tag": "OFERTA"
   },
   {
     "id": "ring-light-pequeno",

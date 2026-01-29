@@ -1,9 +1,6 @@
 const WHATSAPP_NUMBER = "5566992358200"; // altere se precisar
 
-const HERO_IMAGES = [
-  { src: "assets/arte-perfil-novo.jpg", caption: "Perfil novo do Instagram" },
-  { src: "assets/arte-smartwatch.jpg", caption: "Smartwatch a partir de R$ 189,90" }
-];
+const HERO_IMAGES = ["assets/arte-smartwatch.jpg"];
 
 let products = [];
 let cart = {}; // { productId: qty }
@@ -421,7 +418,7 @@ function updatePixUI(){
   qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${data}`;
 }
 
-function init(){
+async function init(){
   el("year").textContent = String(new Date().getFullYear());
 
   // hero dots
