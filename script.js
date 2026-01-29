@@ -141,6 +141,8 @@ function renderProducts(){
 }
 
 function renderCart(){
+  if (!el("cartList") || !el("cartTotal")) return;
+
   const wrap = el("cartItems");
   const entries = Object.entries(cart).filter(([,q]) => q > 0);
 
@@ -216,7 +218,7 @@ function updateTotals(){
   el("subtotal").textContent = money(t.subtotal);
   el("discounts").textContent = "- " + money(t.discountValue);
   el("total").textContent = money(t.total);
-  el("pixTotal").textContent = money(t.pixTotal);
+  if (el("pixTotal")) el("pixTotal").textContent = money(t.pixTotal);
 
   updatePixUI();
 }
@@ -366,7 +368,7 @@ function bindEvents(){
     });
   });
 
-  el("whatsBtn").addEventListener("click", () => {
+  el("whatsBtn")?.addEventListener("click", () => {
     const msg = buildWhatsAppMessage();
     if (!msg){
       alert("Seu carrinho está vazio.");
@@ -376,7 +378,7 @@ function bindEvents(){
     window.open(url, "_blank");
   });
 
-  el("copyPix").addEventListener("click", async () => {
+  el("copyPix")?.addEventListener("click", async () => {
     const key = el("pixKey").textContent.trim();
     try{
       await navigator.clipboard.writeText(key);
@@ -388,8 +390,8 @@ function bindEvents(){
   });
 
   // hero
-  el("heroPrev").addEventListener("click", () => rotateHero(false));
-  el("heroNext").addEventListener("click", () => rotateHero(true));
+  el("heroPrev")?.addEventListener("click", () => rotateHero(false));
+  el("heroNext")?.addEventListener("click", () => rotateHero(true));
 }
 
 async 
@@ -421,7 +423,7 @@ function updatePixUI(){
 }
 
 async function init(){
-  el("year").textContent = String(new Date().getFullYear());
+  if (el("year")) el("year").textContent = String(new Date().getFullYear());
 
   // hero dots
   updateHeroDots();
