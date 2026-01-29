@@ -1,466 +1,369 @@
-const EMBEDDED_PRODUCTS = [{"id": "smartwatch-m9", "name": "Smartwatch M9", "price": 189.9, "category": "relogios", "images": ["assets/arte-smartwatch.jpg"], "description": "Tecnologia, estilo e praticidade no seu pulso."}, {"id": "relogio-digital", "name": "Relógio Digital LED (Oferta)", "price": 79.9, "originalPrice": 129.9, "category": "relogios", "images": ["assets/relogio-digital.jpg", "assets/relogio-digital-2.webp"], "description": "Relógio digital esportivo, confortável e resistente. Oferta por tempo limitado."}, {"id": "luminaria-lua", "name": "Luminária Lua", "price": 59.9, "category": "decor", "images": ["assets/lua-umidificador.jpg"], "description": "Luminária temática para decorar seu ambiente."}, {"id": "umidificador-astronauta", "name": "Umidificador Astronauta (Mega Oferta)", "price": 59.9, "originalPrice": 129.9, "category": "decor", "images": ["assets/SaveClip.App_617398552_17858356845594529_5367524789386729616_n.jpg", "assets/SaveClip.App_614582877_17858356854594529_3890824448854941767_n.jpg", "assets/SaveClip.App_612407789_17858356869594529_8488093288935078756_n.jpg"], "description": "Decoração, bem-estar e luzes do universo no seu quarto!"}, {"id": "projetor-estrelas-astronauta", "name": "Projetor de Estrelas Astronauta (Oferta)", "price": 100.0, "originalPrice": 159.9, "category": "decor", "images": ["assets/projetor-astronauta.jpg"], "description": "Projeção de estrelas e nebulosas. Perfeito para quarto, festa e relaxar."}, {"id": "camera-seguranca-360", "name": "Câmera de Segurança Wi‑Fi 360° (Externa/Interna)", "price": 359.9, "category": "seguranca", "images": ["assets/camera-seguranca-360.jpg"], "description": "Câmera de segurança interna e externa, rotação 360°, visão noturna. Proteção para seu lar.", "promoPrice": null, "tag": "PROTEÇÃO"}, {"id": "mochila-feminina-couro", "name": "Mochila Feminina Couro (Oferta)", "price": 99.9, "originalPrice": 139.9, "category": "mochilas", "images": ["assets/mochila-feminina.png"], "description": "Mochila feminina estilo couro. Oferta especial."}, {"id": "fone-ouvido", "name": "Fone de Ouvido", "price": 39.9, "category": "fones", "images": ["assets/fone-ouvido.jpg"], "description": "Fone prático para o dia a dia."}, {"id": "bone-country", "name": "Bonés Country (TXC / Texas Farm) - Oferta", "price": 49.9, "originalPrice": 89.9, "category": "acessorios", "images": ["assets/bone-country.jpg"], "description": "Vários modelos. Oferta limitada."}, {"id": "receptor-bluetooth-usb-p2", "name": "Receptor Bluetooth USB/P2", "price": 29.9, "category": "acessorios", "images": ["assets/placeholder.png"], "description": "Transforme seu som em Bluetooth. Ideal para carro e caixas de som."}, {"id": "chaveiro-stitch-3d", "name": "Chaveiro Stitch 3D (6cm x 6cm)", "price": 19.9, "category": "chaveiros", "images": ["assets/chaveiro-stitch.jpg"], "description": "Robusto, lindo e perfeito para chave, mochila e presente."}, {"id": "chaveiro-capivara", "name": "Chaveiro Capivara", "price": 19.9, "category": "chaveiros", "images": ["assets/placeholder.png"], "description": "Modelos variados. Foto em breve."}, {"id": "pelucias-diversas", "name": "Pelúcias Diversas", "price": 29.9, "category": "pelucias", "images": ["assets/placeholder.png"], "description": "Modelos variados. Foto em breve."}, {"id": "cartao-memoria-16gb", "name": "Cartão de Memória MasterDrive 16 GB", "price": 59.9, "category": "eletronicos", "images": ["assets/cartao-memoria-16gb.jpg"], "description": "Cartão de memória com adaptador."}, {"id": "cartao-memoria-8gb", "name": "Cartão de Memória MasterDrive 8 GB", "price": 45.9, "category": "eletronicos", "images": ["assets/cartao-memoria-8gb.webp"], "description": "Cartão de memória com adaptador."}, {"id": "bracelete-preto-esportivo", "name": "Bracelete Preto Esportivo", "price": 49.9, "category": "acessorios", "images": ["assets/placeholder.png"], "description": "Pulseira/bracelete esportivo preto."}, {"id": "carregador-tipo-c", "name": "Carregador Tipo C", "price": 49.9, "category": "eletronicos", "images": ["assets/placeholder.png"], "description": "Carregador Tipo C. Foto em breve."}, {"id": "carregador-iphone", "name": "Carregador iPhone", "price": 59.9, "category": "eletronicos", "images": ["assets/placeholder.png"], "description": "Carregador iPhone. Foto em breve."}, {"id": "controle-universal", "name": "Controle Universal", "price": 39.9, "category": "eletronicos", "images": ["assets/products/controle-universal.jpg"], "description": "Controle universal para TV/Smart TV (vários modelos).", "promoPrice": null}, {"id": "powerbank-itblue-20000", "name": "Power Bank It‑Blue 20.000mAh (Oferta)", "price": 229.9, "originalPrice": 229.9, "category": "eletronicos", "images": ["assets/products/powerbank-itblue-20000.jpg"], "description": "Power bank IT‑BLUE 20.000mAh. Prático para o dia a dia.", "promoPrice": 159.9, "tag": "OFERTA"}, {"id": "oculos-corrida-espelhado", "name": "Óculos Corrida Esportivo Espelhado (Oferta)", "price": 89.9, "originalPrice": 89.9, "category": "acessorios", "images": ["assets/products/oculos-corrida-espelhado.jpg"], "description": "Óculos esportivo espelhado para corrida/ciclismo.", "promoPrice": 69.9, "tag": "OFERTA"}, {"id": "oculos-branco-espelhado", "name": "Óculos Branco Esportivo Espelhado (Oferta)", "price": 89.9, "originalPrice": 89.9, "category": "acessorios", "images": ["assets/products/oculos-branco-espelhado.jpg"], "description": "Óculos esportivo espelhado com detalhes brancos.", "promoPrice": 69.9, "tag": "OFERTA"}, {"id": "perfume-good-girl", "name": "Perfume Importado Good Girl", "price": 129.9, "category": "perfumes", "images": ["assets/products/perfume-good-girl-preto.jpg", "assets/products/perfume-good-girl-claro.jpg"], "description": "Perfume feminino importado (inspirado Good Girl). Fixação prolongada.", "promoPrice": 70.0, "tag": "OFERTA"}, {"id": "teclado-gamer-rgb", "name": "Teclado Gamer RGB (Oferta)", "price": 169.9, "originalPrice": 169.9, "category": "eletronicos", "images": ["assets/products/teclado-gamer-rgb.jpg"], "description": "Teclado gamer single hand com iluminação RGB.", "promoPrice": 139.9, "tag": "OFERTA"}, {"id": "caixa-som-roda-azul", "name": "Caixa de Som Roda Azul (Oferta)", "price": 159.9, "originalPrice": 159.9, "category": "eletronicos", "images": ["assets/products/caixa-som-roda-azul.jpg"], "description": "Caixa de som estilo roda (wireless). Som potente e design diferente.", "promoPrice": 125.0, "tag": "OFERTA"}, {"id": "ring-light-pequeno", "name": "Ring Light Pequeno", "price": 159.9, "category": "eletronicos", "images": ["assets/placeholder.png"], "description": "Iluminação profissional. Foto em breve."}, {"id": "ring-light-medio", "name": "Ring Light Médio", "price": 250.0, "category": "eletronicos", "images": ["assets/placeholder.png"], "description": "Iluminação profissional. Foto em breve."}, {"id": "ring-light-extra-grande", "name": "Ring Light Extra Grande", "price": 359.9, "category": "eletronicos", "images": ["assets/placeholder.png"], "description": "Iluminação profissional. Foto em breve."}];
 
-const WHATSAPP_NUMBER = "5566992358200"; // altere se precisar
+/* Zoe Importados MT - Script (estável, sem async/await) */
+(function(){
+  const WHATS_NUMBER = "5566992358200";
+  const PIX_KEY = "38.052.604/0001-54";
+  const MERCHANT_NAME = "ZOE IMPORTADOS MT";
+  const MERCHANT_CITY = "SINOP";
 
-const HERO_IMAGES = ["assets/arte-smartwatch.jpg"];
+  const state = {
+    products: [],
+    cart: loadCart(),
+    isDriver: false,
+    isStudent: false,
+    address: "",
+    km: 0
+  };
 
-let products = [];
-let cart = {}; // { productId: qty }
-let heroIndex = 0;
+  function $(sel){ return document.querySelector(sel); }
+  function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
+  function money(v){ return (v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
 
-const money = (v) => (v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  function loadCart(){
+    try{ return JSON.parse(localStorage.getItem("zoe_cart_v1")||"{}"); }
+    catch(e){ return {}; }
+  }
+  function saveCart(){
+    localStorage.setItem("zoe_cart_v1", JSON.stringify(state.cart));
+  }
 
-// ===== Pix (BR Code / copia e cola) =====
-function emv(id, value){
-  const v = String(value);
-  return String(id).padStart(2,"0") + String(v.length).padStart(2,"0") + v;
-}
-function crc16ccitt(str){
-  let crc = 0xFFFF;
-  for (let i=0;i<str.length;i++){
-    crc ^= (str.charCodeAt(i) << 8);
-    for (let j=0;j<8;j++){
-      if (crc & 0x8000) crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
-      else crc = (crc << 1) & 0xFFFF;
+  function escapeHtml(s){
+    return String(s||"")
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  }
+
+  function getCartItems(){
+    const out = [];
+    Object.keys(state.cart).forEach(id=>{
+      const qty = state.cart[id];
+      const p = state.products.find(x=>x.id===id);
+      if(p && qty>0) out.push({product:p, qty});
+    });
+    return out;
+  }
+
+  function calcTotals(){
+    const items = getCartItems();
+    let subtotal = 0;
+    items.forEach(({product, qty})=> subtotal += (product.price||0) * qty);
+
+    const freight = Math.max(0, (Number(state.km)||0) * 1.5);
+
+    // descontos
+    let discount = 0;
+
+    // Pix 15% OFF no total de produtos (automático)
+    discount += subtotal * 0.15;
+
+    // Motorista 20% OFF no total (se estudante também marcado, motorista só entra para itens fora mochila/fone)
+    if(state.isDriver){
+      if(state.isStudent){
+        let driverBase = 0;
+        items.forEach(({product, qty})=>{
+          const cat = (product.category||"").toLowerCase();
+          const isMochila = cat.includes("mochila");
+          const isFone = cat.includes("fone") || cat.includes("headphone") || cat.includes("audio");
+          if(!isMochila && !isFone) driverBase += (product.price||0) * qty;
+        });
+        discount += driverBase * 0.20;
+      }else{
+        discount += subtotal * 0.20;
+      }
     }
-  }
-  return crc.toString(16).toUpperCase().padStart(4,"0");
-}
-function buildPixPayload({key, name, city, amount, txid="***"}){
-  const gui = emv("00","br.gov.bcb.pix");
-  const k = emv("01", key);
-  const desc = emv("02", "ZOE IMPORTADOS MT");
-  const mai = emv("26", gui + k + desc);
 
-  const payload =
-    emv("00","01") +
-    emv("01","12") +
-    mai +
-    emv("52","0000") +
-    emv("53","986") +
-    emv("54", amount.toFixed(2)) +
-    emv("58","BR") +
-    emv("59", name.substring(0,25)) +
-    emv("60", city.substring(0,15)) +
-    emv("62", emv("05", txid.substring(0,25)));
+    // Estudante 40% OFF em mochilas e fones
+    if(state.isStudent){
+      let studentBase = 0;
+      items.forEach(({product, qty})=>{
+        const cat = (product.category||"").toLowerCase();
+        const isMochila = cat.includes("mochila");
+        const isFone = cat.includes("fone") || cat.includes("headphone") || cat.includes("audio");
+        if(isMochila || isFone) studentBase += (product.price||0) * qty;
+      });
+      discount += studentBase * 0.40;
+    }
 
-  const toCrc = payload + "6304";
-  const crc = crc16ccitt(toCrc);
-  return toCrc + crc;
-}
+    discount = Math.min(discount, subtotal);
+    const total = Math.max(0, subtotal - discount + freight);
 
-function el(id){ return document.getElementById(id); }
-
-function getDiscountFlags(){
-  return {
-    driver: el("discountDriver")?.checked || false,
-    student: el("discountStudent")?.checked || false
-  };
-}
-
-function getFrete(){
-  const km = parseFloat(el("km")?.value || "0") || 0;
-  return Math.max(0, km) * 1.5;
-}
-
-function productMatchesFilters(p){
-  const q = (el("search")?.value || "").trim().toLowerCase();
-  const cat = el("categoryFilter")?.value || "all";
-  const inCat = (cat === "all") ? true : p.category === cat;
-  const inQ = !q ? true : (p.name + " " + (p.desc || "")).toLowerCase().includes(q);
-  return inCat && inQ;
-}
-
-function buildCategoryFilter(){
-  const sel = el("categoryFilter");
-  const cats = Array.from(new Set(products.map(p => p.category))).sort();
-  sel.innerHTML = '<option value="all">Todas as categorias</option>' +
-    cats.map(c => `<option value="${c}">${prettyCategory(c)}</option>`).join("");
-}
-
-function prettyCategory(c){
-  const map = {
-    "relogios":"Relógios",
-    "mochilas":"Mochilas",
-    "som":"Som & Fones",
-    "casa":"Casa & Decoração",
-    "seguranca":"Segurança",
-    "iluminacao":"Iluminação",
-    "moda":"Moda",
-    "diversos":"Diversos"
-  };
-  return map[c] || (c.charAt(0).toUpperCase() + c.slice(1));
-}
-
-function renderProducts(){
-  const wrap = el("products");
-  wrap.innerHTML = "";
-  const filtered = products.filter(productMatchesFilters);
-
-  if (!filtered.length){
-    wrap.innerHTML = '<div class="notice__card" style="grid-column:1/-1"><p>Nenhum produto encontrado.</p></div>';
-    return;
+    return { items, subtotal, discount, freight, total };
   }
 
-  filtered.forEach(p => {
-    const qty = cart[p.id] || 0;
-    const hasOld = typeof p.oldPrice === "number" && p.oldPrice > p.price;
-    const img0 = (p.images && p.images[0]) ? p.images[0] : "";
+  // CRC16/CCITT-FALSE
+  function crc16(str){
+    let crc = 0xFFFF;
+    for(let c=0;c<str.length;c++){
+      crc ^= (str.charCodeAt(c) << 8);
+      for(let i=0;i<8;i++){
+        crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+        crc &= 0xFFFF;
+      }
+    }
+    return crc.toString(16).toUpperCase().padStart(4,"0");
+  }
+  function emv(id, value){
+    const v = String(value);
+    return String(id).padStart(2,"0") + String(v.length).padStart(2,"0") + v;
+  }
+  function buildPixPayload(amount){
+    const amt = Number(amount||0).toFixed(2);
+    const gui = emv("00", "br.gov.bcb.pix");
+    const key = emv("01", PIX_KEY);
+    const mai = emv("26", gui + key);
 
-    const card = document.createElement("div");
-    card.className = "product";
-    card.innerHTML = `
-      <div class="product__media">
-        <img src="${img0}" alt="${escapeHtml(p.name)}" data-pid="${p.id}" data-imgidx="0" />
-        ${p.tag ? `<div class="product__tag">${escapeHtml(p.tag)}</div>` : ""}
-        ${p.images && p.images.length > 1 ? `
-          <div class="product__carousel">
-            <button type="button" data-action="prevImg" data-pid="${p.id}">‹</button>
-            <button type="button" data-action="nextImg" data-pid="${p.id}">›</button>
-          </div>` : ""}
-      </div>
-      <div class="product__body">
-        <h3 class="product__title">${escapeHtml(p.name)}</h3>
-        ${p.desc ? `<p class="product__desc">${escapeHtml(p.desc)}</p>` : ""}
-        <div class="price">
-          <div class="price__now">${money(p.price)}</div>
-          ${hasOld ? `<div class="price__old">${money(p.oldPrice)}</div>` : ""}
-        </div>
-        <div class="product__actions">
-          <button class="btn btn--primary" data-action="add" data-pid="${p.id}">Adicionar</button>
-          <div class="qty">
-            <button class="btn" data-action="dec" data-pid="${p.id}">-</button>
-            <strong>${qty}</strong>
-            <button class="btn" data-action="inc" data-pid="${p.id}">+</button>
+    const base =
+      emv("00","01") +
+      emv("01","12") +
+      mai +
+      emv("52","0000") +
+      emv("53","986") +
+      emv("54", amt) +
+      emv("58","BR") +
+      emv("59", MERCHANT_NAME.slice(0,25)) +
+      emv("60", MERCHANT_CITY.slice(0,15)) +
+      emv("62", emv("05", "ZOE" + Date.now().toString().slice(-6)));
+
+    const without = base + "6304";
+    return without + crc16(without);
+  }
+
+  function renderProducts(){
+    const grid = $("#products");
+    if(!grid) return;
+    grid.classList.add("catalog_grid");
+    grid.innerHTML = "";
+
+    state.products.forEach(p=>{
+      const card = document.createElement("div");
+      card.className = "product_card";
+
+      const imgSrc = (p.images && p.images.length) ? p.images[0] : "assets/placeholder.jpg";
+      const hasCarousel = p.images && p.images.length > 1;
+
+      card.innerHTML = `
+        <img src="${imgSrc}" alt="${escapeHtml(p.name)}" loading="lazy" />
+        <div style="padding:12px;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px;">
+            <h3 style="margin:0; font-size:16px; line-height:1.2;">${escapeHtml(p.name)}</h3>
+            <div style="font-weight:900; white-space:nowrap;">${money(p.price)}</div>
+          </div>
+          <div class="small" style="margin-top:6px;">${escapeHtml(p.description||"")}</div>
+          ${hasCarousel ? `<div class="small" style="margin-top:6px;">Toque na foto para ver mais ➜</div>` : ``}
+          <div style="display:flex; gap:8px; margin-top:10px; align-items:center;">
+            <button class="btn btn_primary" data-add="${p.id}">Adicionar</button>
+            <button class="btn" data-minus="${p.id}">-</button>
+            <div class="small" style="min-width:40px; text-align:center;" id="qty_${p.id}">${state.cart[p.id]||0}</div>
+            <button class="btn" data-plus="${p.id}">+</button>
           </div>
         </div>
-      </div>
-    `;
-    wrap.appendChild(card);
-  });
-}
+      `;
 
-function renderCart(){
-  if (!el("cartList") || !el("cartTotal")) return;
+      // carrossel simples no clique da imagem
+      const img = card.querySelector("img");
+      if(p.images && p.images.length > 1){
+        let idx = 0;
+        img.style.cursor = "pointer";
+        img.addEventListener("click", ()=>{
+          idx = (idx + 1) % p.images.length;
+          img.src = p.images[idx];
+        });
+      }
 
-  const wrap = el("cartItems");
-  const entries = Object.entries(cart).filter(([,q]) => q > 0);
-
-  if (!entries.length){
-    wrap.innerHTML = "<p class='muted'>Seu carrinho está vazio.</p>";
-    updateTotals();
-    return;
-  }
-
-  wrap.innerHTML = "";
-  for (const [pid, qty] of entries){
-    const p = products.find(x => x.id === pid);
-    if (!p) continue;
-
-    const line = document.createElement("div");
-    line.className = "cartitem";
-    line.innerHTML = `
-      <div class="cartitem__left">
-        <div class="cartitem__name">${escapeHtml(p.name)}</div>
-        <div class="cartitem__meta">${qty} × ${money(p.price)}</div>
-      </div>
-      <div class="cartitem__right">
-        <div><strong>${money(p.price * qty)}</strong></div>
-        <div class="cartitem__controls">
-          <button class="btn" data-action="cartDec" data-pid="${pid}">-</button>
-          <button class="btn" data-action="cartInc" data-pid="${pid}">+</button>
-          <button class="btn" data-action="remove" data-pid="${pid}">🗑️</button>
-        </div>
-      </div>
-    `;
-    wrap.appendChild(line);
-  }
-
-  updateTotals();
-}
-
-function calcTotals(){
-  const flags = getDiscountFlags();
-  const frete = getFrete();
-
-  let subtotal = 0;
-  let discountValue = 0;
-
-  for (const [pid, qty] of Object.entries(cart)){
-    if (qty <= 0) continue;
-    const p = products.find(x => x.id === pid);
-    if (!p) continue;
-
-    const line = p.price * qty;
-    subtotal += line;
-
-    // descontos:
-    // motorista: 20% total
-    // estudante: 40% apenas em mochilas e fones
-    const eligibleStudent = (p.category === "mochilas" || (p.name || "").toLowerCase().includes("fone"));
-    const discDriver = flags.driver ? 0.20 : 0;
-    const discStudent = (flags.student && eligibleStudent) ? 0.40 : 0;
-
-    const bestDisc = Math.max(discDriver, discStudent);
-    discountValue += line * bestDisc;
-  }
-
-  const total = Math.max(0, subtotal - discountValue) + frete;
-  const pixTotal = total * 0.85;
-
-  return { subtotal, discountValue, frete, total, pixTotal };
-}
-
-function updateTotals(){
-  const t = calcTotals();
-  el("freteValue").textContent = money(t.frete);
-  el("freteTotal").textContent = money(t.frete);
-  el("subtotal").textContent = money(t.subtotal);
-  el("discounts").textContent = "- " + money(t.discountValue);
-  el("total").textContent = money(t.total);
-  if (el("pixTotal")) el("pixTotal").textContent = money(t.pixTotal);
-
-  updatePixUI();
-}
-
-function addToCart(pid, delta=1){
-  cart[pid] = (cart[pid] || 0) + delta;
-  if (cart[pid] < 0) cart[pid] = 0;
-  renderProducts();
-  renderCart();
-  saveCart();
-}
-
-function removeFromCart(pid){
-  delete cart[pid];
-  renderProducts();
-  renderCart();
-  saveCart();
-}
-
-function saveCart(){
-  try{ localStorage.setItem("zoe_cart", JSON.stringify(cart)); }catch(e){}
-}
-function loadCart(){
-  try{
-    const raw = localStorage.getItem("zoe_cart");
-    if (raw) cart = JSON.parse(raw) || {};
-  }catch(e){ cart = {}; }
-}
-
-function escapeHtml(str){
-  return String(str || "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-function rotateHero(next=true){
-  heroIndex = (heroIndex + (next ? 1 : -1) + HERO_IMAGES.length) % HERO_IMAGES.length;
-  const img = el("heroImg");
-  img.src = HERO_IMAGES[heroIndex].src;
-  img.alt = HERO_IMAGES[heroIndex].alt;
-  updateHeroDots();
-}
-
-function updateHeroDots(){
-  const dots = el("heroDots");
-  dots.innerHTML = "";
-  HERO_IMAGES.forEach((_, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.setAttribute("aria-current", i === heroIndex ? "true" : "false");
-    b.addEventListener("click", () => { heroIndex = i; rotateHero(true); });
-    dots.appendChild(b);
-  });
-}
-
-function cycleProductImage(pid, dir){
-  const img = document.querySelector(`img[data-pid="${pid}"]`);
-  if (!img) return;
-  const p = products.find(x => x.id === pid);
-  if (!p || !p.images || p.images.length < 2) return;
-
-  let idx = parseInt(img.dataset.imgidx || "0", 10) || 0;
-  idx = (idx + dir + p.images.length) % p.images.length;
-  img.dataset.imgidx = String(idx);
-  img.src = p.images[idx];
-}
-
-function buildWhatsAppMessage(){
-  const entries = Object.entries(cart).filter(([,q]) => q > 0);
-  if (!entries.length) return null;
-
-  const flags = getDiscountFlags();
-  const address = (el("address")?.value || "").trim();
-  const km = parseFloat(el("km")?.value || "0") || 0;
-
-  const t = calcTotals();
-
-  const lines = [];
-  lines.push("🛒 *Pedido - ZOE IMPORTADOS MT*");
-  lines.push("");
-  lines.push("*Itens:*");
-
-  for (const [pid, qty] of entries){
-    const p = products.find(x => x.id === pid);
-    if (!p) continue;
-    lines.push(`• ${qty}x ${p.name} - ${money(p.price * qty)}`);
-  }
-
-  lines.push("");
-  lines.push(`Subtotal: ${money(t.subtotal)}`);
-  lines.push(`Descontos: -${money(t.discountValue)}`);
-
-  if (address) lines.push(`Endereço: ${address}`);
-  if (km > 0) lines.push(`Distância: ${km} km`);
-  lines.push(`Frete: ${money(t.frete)}`);
-  lines.push(`*Total: ${money(t.total)}*`);
-  lines.push(`*Total no Pix (15% OFF): ${money(t.pixTotal)}*`);
-
-  lines.push("");
-  lines.push("*Descontos marcados:*");
-  lines.push(`• Motorista de app: ${flags.driver ? "SIM" : "NÃO"}`);
-  lines.push(`• Estudante: ${flags.student ? "SIM" : "NÃO"}`);
-
-  lines.push("");
-  lines.push("*Pagamento:*");
-  lines.push("• Pix (15% OFF): CNPJ 38.052.604/0001-54 (QR Code no site – definir valor no app)");
-  lines.push("• Cartão de crédito: consulte no atendimento");
-  lines.push("");
-  lines.push("✅ Para finalizar, confirme este pedido e informe a forma de pagamento. Após pagar, envie o comprovante com a mensagem: *COMPRA FINALIZADA*.");
-
-  return lines.join("\n");
-}
-
-function bindEvents(){
-  document.body.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-action]");
-    if (!btn) return;
-    const act = btn.dataset.action;
-    const pid = btn.dataset.pid;
-
-    if (act === "add" || act === "inc") addToCart(pid, 1);
-    if (act === "dec") addToCart(pid, -1);
-
-    if (act === "cartInc") addToCart(pid, 1);
-    if (act === "cartDec") addToCart(pid, -1);
-    if (act === "remove") removeFromCart(pid);
-
-    if (act === "prevImg") cycleProductImage(pid, -1);
-    if (act === "nextImg") cycleProductImage(pid, +1);
-  });
-
-  ["search","categoryFilter","discountDriver","discountStudent","km","address"].forEach(id => {
-    const x = el(id);
-    if (!x) return;
-    x.addEventListener("input", () => {
-      renderProducts();
-      renderCart();
-      updateTotals();
+      grid.appendChild(card);
     });
-    x.addEventListener("change", () => {
-      renderProducts();
-      renderCart();
-      updateTotals();
-    });
-  });
 
-  el("whatsBtn")?.addEventListener("click", () => {
-    const msg = buildWhatsAppMessage();
-    if (!msg){
-      alert("Seu carrinho está vazio.");
-      return;
-    }
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(url, "_blank");
-  });
+    // delegado (1 vez)
+    grid.addEventListener("click", (e)=>{
+      const add = e.target.closest("[data-add]");
+      const plus = e.target.closest("[data-plus]");
+      const minus = e.target.closest("[data-minus]");
+      if(add) changeQty(add.getAttribute("data-add"), 1);
+      if(plus) changeQty(plus.getAttribute("data-plus"), 1);
+      if(minus) changeQty(minus.getAttribute("data-minus"), -1);
+    }, { once:true });
 
-  el("copyPix")?.addEventListener("click", async () => {
-    const key = el("pixKey").textContent.trim();
-    try{
-      await navigator.clipboard.writeText(key);
-      el("copyPix").textContent = "Copiado ✅";
-      setTimeout(() => el("copyPix").textContent = "Copiar chave Pix", 1500);
-    }catch(e){
-      alert("Não consegui copiar automaticamente. Copie manualmente: " + key);
-    }
-  });
-
-  // hero
-  el("heroPrev")?.addEventListener("click", () => rotateHero(false));
-  el("heroNext")?.addEventListener("click", () => rotateHero(true));
-}
-
-async function updatePixUI(){
-  const qrImg = document.getElementById("pixQrImg");
-  const copia = document.getElementById("pixCopiaCola");
-  const pixKeyEl = document.getElementById("pixKey");
-  if (!qrImg || !copia || !pixKeyEl) return;
-
-  // Recalcula a partir do estado atual do carrinho
-  const subtotal = calcSubtotal(cart);
-  const freight = calcFreight();
-  const discount = calcDiscount(subtotal);
-  const total = Math.max(0, subtotal - discount) + freight;
-  const pixTotal = total * (1 - PIX_DISCOUNT);
-
-  const payload = buildPixPayload({
-    key: pixKeyEl.value.trim() || "38.052.604/0001-54",
-    name: "ZOE IMPORTADOS MT",
-    city: "SINOP",
-    amount: pixTotal,
-    txid: "ZOEIMPORTADOS"
-  });
-
-  copia.value = payload;
-  const data = encodeURIComponent(payload);
-  qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${data}`;
-}
-
-async function init(){
-  if (el("year")) el("year").textContent = String(new Date().getFullYear());
-
-  // hero dots
-  updateHeroDots();
-
-  // products
-  try {
-    const res = await fetch("products.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    products = await res.json();
-  } catch (e) {
-    console.warn("Falha ao carregar products.json, usando lista embutida.", e);
-    products = Array.isArray(EMBEDDED_PRODUCTS) ? EMBEDDED_PRODUCTS : [];
+    updateAll();
   }
-loadCart();
-  buildCategoryFilter();
-  renderProducts();
-  renderCart();
-  updateTotals();
-  bindEvents();
-}
 
-init().catch((err) => {
-  console.error(err);
-  alert("Erro ao carregar a loja. Verifique se products.json está na raiz do repositório.");
-});
+  function changeQty(id, delta){
+    state.cart[id] = Math.max(0, (state.cart[id]||0) + delta);
+    if(state.cart[id] === 0) delete state.cart[id];
+    saveCart();
+    updateAll();
+  }
 
+  function renderCart(){
+    const totals = calcTotals();
 
-// Copiar Pix (copia e cola)
-const copyPixCodeBtn = document.getElementById("copyPixCodeBtn");
-if (copyPixCodeBtn){
-  copyPixCodeBtn.addEventListener("click", async () => {
-    const t = document.getElementById("pixCopiaCola")?.value || "";
-    if (!t) return;
-    try{
-      await navigator.clipboard.writeText(t);
-      alert("Pix (copia e cola) copiado!");
-    }catch(e){
-      const ta = document.getElementById("pixCopiaCola");
-      if (ta){ ta.select(); document.execCommand("copy"); alert("Pix (copia e cola) copiado!"); }
+    const list = $("#cartItems");
+    if(list){
+      list.innerHTML = "";
+      if(totals.items.length === 0){
+        list.innerHTML = `<div class="small" style="padding:10px 0;">Seu carrinho está vazio 🙂</div>`;
+      }else{
+        totals.items.forEach(({product, qty})=>{
+          const row = document.createElement("div");
+          row.style.display="flex";
+          row.style.justifyContent="space-between";
+          row.style.gap="10px";
+          row.style.padding="10px 0";
+          row.style.borderBottom="1px solid rgba(255,255,255,.10)";
+          row.innerHTML = `
+            <div>
+              <div style="font-weight:800;">${escapeHtml(product.name)}</div>
+              <div class="small">${money(product.price)} x ${qty}</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button class="btn" data-minus="${product.id}">-</button>
+              <div style="min-width:26px; text-align:center; font-weight:800;">${qty}</div>
+              <button class="btn" data-plus="${product.id}">+</button>
+            </div>
+          `;
+          list.appendChild(row);
+        });
+      }
     }
-  });
-}
+
+    // totais (ids existentes)
+    if($("#subtotal")) $("#subtotal").textContent = money(totals.subtotal);
+    if($("#discounts")) $("#discounts").textContent = "- " + money(totals.discount);
+    if($("#freteTotal")) $("#freteTotal").textContent = money(totals.freight);
+    if($("#total")) $("#total").textContent = money(totals.total);
+    if($("#pixTotal")) $("#pixTotal").textContent = money(totals.total);
+    if($("#freteValue")) $("#freteValue").textContent = money(totals.freight);
+
+    // QR Pix com valor total
+    const payload = buildPixPayload(totals.total);
+
+    const img = $("#pixQrImg");
+    if(img){
+      img.src = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" + encodeURIComponent(payload);
+      img.alt = "QR Code Pix - Total " + money(totals.total);
+    }
+    const copia = $("#pixCopiaCola");
+    if(copia) copia.value = payload;
+
+    // badge no botão flutuante
+    const count = totals.items.reduce((a,b)=>a+b.qty,0);
+    const badge = $("#cartBadge");
+    if(badge) badge.textContent = String(count);
+
+    return totals;
+  }
+
+  function updateAll(){
+    Object.keys(state.cart).forEach(id=>{
+      const el = $("#qty_"+id);
+      if(el) el.textContent = String(state.cart[id]||0);
+    });
+    $all('[id^="qty_"]').forEach(el=>{
+      const id = el.id.replace("qty_","");
+      if(!state.cart[id]) el.textContent = "0";
+    });
+    renderCart();
+  }
+
+  function buildWhatsMessage(totals){
+    const lines = [];
+    lines.push("🛍️ *Pedido - Zoe Importados MT*");
+    lines.push("");
+    totals.items.forEach(({product, qty})=>{
+      lines.push(`• ${qty}x ${product.name} — ${money(product.price * qty)}`);
+    });
+    lines.push("");
+    lines.push(`Subtotal: ${money(totals.subtotal)}`);
+    lines.push(`Descontos (Pix 15% OFF + regras): -${money(totals.discount)}`);
+    lines.push(`Frete: ${money(totals.freight)} (R$ 1,50/km)`);
+    lines.push(`*Total: ${money(totals.total)}*`);
+    lines.push("");
+    lines.push("📍 *Entrega*");
+    if(state.address) lines.push("Endereço: " + state.address);
+    if(state.km) lines.push("Distância: " + state.km + " km");
+    lines.push("");
+    lines.push("✅ Quero finalizar a compra!");
+    return lines.join("\n");
+  }
+
+  function bindUI(){
+    // descontos
+    const driver = $("#discountDriver");
+    const student = $("#discountStudent");
+    if(driver) driver.addEventListener("change", ()=>{ state.isDriver = driver.checked; updateAll(); });
+    if(student) student.addEventListener("change", ()=>{ state.isStudent = student.checked; updateAll(); });
+
+    // frete
+    const addr = $("#address");
+    const km = $("#km");
+    if(addr) addr.addEventListener("input", ()=>{ state.address = addr.value; updateAll(); });
+    if(km) km.addEventListener("input", ()=>{
+      state.km = Number(String(km.value).replace(",","."));
+      updateAll();
+    });
+
+    // carrinho (controles)
+    const list = $("#cartItems");
+    if(list){
+      list.addEventListener("click",(e)=>{
+        const plus = e.target.closest("[data-plus]");
+        const minus = e.target.closest("[data-minus]");
+        if(plus) changeQty(plus.getAttribute("data-plus"), 1);
+        if(minus) changeQty(minus.getAttribute("data-minus"), -1);
+      });
+    }
+
+    // finalizar
+    const btn = $("#whatsBtn");
+    if(btn) btn.addEventListener("click", ()=>{
+      const totals = calcTotals();
+      if(totals.items.length === 0){
+        alert("Seu carrinho está vazio 🙂");
+        return;
+      }
+      const msg = buildWhatsMessage(totals);
+      window.open("https://wa.me/"+WHATS_NUMBER+"?text="+encodeURIComponent(msg), "_blank");
+    });
+
+    // botão flutuante: rolar até carrinho
+    const floatBtn = $("#openCartFloat");
+    if(floatBtn){
+      floatBtn.addEventListener("click", ()=>{
+        const cart = document.querySelector("#cartItems") || document.querySelector("#checkout") || document.querySelector(".catalog");
+        if(cart) cart.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    }
+
+    // copiar pix
+    const copyBtn = $("#copyPix");
+    if(copyBtn){
+      copyBtn.addEventListener("click", ()=>{
+        const copia = $("#pixCopiaCola");
+        if(!copia) return;
+        copia.select();
+        copia.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        copyBtn.textContent = "Copiado!";
+        setTimeout(()=>copyBtn.textContent="Copiar Pix", 1200);
+      });
+    }
+  }
+
+  function boot(){
+    bindUI();
+
+    fetch("products.json?v="+Date.now())
+      .then(r=>r.json())
+      .then(data=>{
+        state.products = Array.isArray(data) ? data : [];
+        renderProducts();
+        updateAll();
+      })
+      .catch(err=>{
+        console.error("Erro ao carregar produtos:", err);
+        const grid = $("#products");
+        if(grid) grid.innerHTML = "<div class='product_card' style='padding:14px;'>Não foi possível carregar os produtos.</div>";
+      });
+  }
+
+  document.addEventListener("DOMContentLoaded", boot);
+})();
