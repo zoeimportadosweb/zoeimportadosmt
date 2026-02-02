@@ -1,369 +1,284 @@
+// ZOE IMPORTADOS MT - Loja com carrinho e finalização no WhatsApp
+const WHATS_NUMBER = "5566992358200"; // +55 66 99235-8200
+const PIX_DISCOUNT = 0.15;
 
-/* Zoe Importados MT - Script (estável, sem async/await) */
-(function(){
-  const WHATS_NUMBER = "5566992358200";
-  const PIX_KEY = "38.052.604/0001-54";
-  const MERCHANT_NAME = "ZOE IMPORTADOS MT";
-  const MERCHANT_CITY = "SINOP";
+const fmtBRL = (value) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-  const state = {
-    products: [],
-    cart: loadCart(),
-    isDriver: false,
-    isStudent: false,
-    address: "",
-    km: 0
-  };
+const state = {
+  products: [],
+  filter: "todos",
+  cart: {} // {id: qty}
+};
 
-  function $(sel){ return document.querySelector(sel); }
-  function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
-  function money(v){ return (v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
+const el = (id) => document.getElementById(id);
 
-  function loadCart(){
-    try{ return JSON.parse(localStorage.getItem("zoe_cart_v1")||"{}"); }
-    catch(e){ return {}; }
+function openNavIfMobile(open){
+  const nav = el("nav");
+  if (!nav) return;
+  if (open) nav.classList.add("is-open");
+  else nav.classList.remove("is-open");
+}
+
+function openDrawer(open){
+  el("drawer").classList.toggle("show", open);
+  el("backdrop").classList.toggle("show", open);
+}
+
+function saveCart(){
+  try{ localStorage.setItem("zoe_cart", JSON.stringify(state.cart)); }catch(e){}
+}
+function loadCart(){
+  try{
+    const raw = localStorage.getItem("zoe_cart");
+    if (raw) state.cart = JSON.parse(raw) || {};
+  }catch(e){}
+}
+
+function cartCount(){
+  return Object.values(state.cart).reduce((a,b)=>a+b,0);
+}
+
+function cartItems(){
+  const items = [];
+  for (const [id, qty] of Object.entries(state.cart)){
+    const p = state.products.find(x=>x.id===id);
+    if (p) items.push({p, qty});
   }
-  function saveCart(){
-    localStorage.setItem("zoe_cart_v1", JSON.stringify(state.cart));
-  }
+  return items;
+}
 
-  function escapeHtml(s){
-    return String(s||"")
-      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
-  }
+function cartTotals(){
+  const total = cartItems().reduce((sum, it)=> sum + it.p.price * it.qty, 0);
+  const pix = Math.max(0, total * (1 - PIX_DISCOUNT));
+  return { total, pix };
+}
 
-  function getCartItems(){
-    const out = [];
-    Object.keys(state.cart).forEach(id=>{
-      const qty = state.cart[id];
-      const p = state.products.find(x=>x.id===id);
-      if(p && qty>0) out.push({product:p, qty});
-    });
-    return out;
-  }
+function setFilter(filter){
+  state.filter = filter;
+  document.querySelectorAll(".chip").forEach(btn=>{
+    btn.classList.toggle("active", btn.dataset.filter === filter);
+  });
+  renderCatalog();
+  location.hash = "#produtos";
+}
 
-  function calcTotals(){
-    const items = getCartItems();
-    let subtotal = 0;
-    items.forEach(({product, qty})=> subtotal += (product.price||0) * qty);
+function addToCart(id){
+  state.cart[id] = (state.cart[id] || 0) + 1;
+  saveCart();
+  renderCart();
+}
 
-    const freight = Math.max(0, (Number(state.km)||0) * 1.5);
+function updateQty(id, delta){
+  const q = (state.cart[id] || 0) + delta;
+  if (q <= 0) delete state.cart[id];
+  else state.cart[id] = q;
+  saveCart();
+  renderCart();
+}
 
-    // descontos
-    let discount = 0;
+function clearCart(){
+  state.cart = {};
+  saveCart();
+  renderCart();
+}
 
-    // Pix 15% OFF no total de produtos (automático)
-    discount += subtotal * 0.15;
+function buildWhatsLink(message){
+  const url = new URL("https://wa.me/" + WHATS_NUMBER);
+  url.searchParams.set("text", message);
+  return url.toString();
+}
 
-    // Motorista 20% OFF no total (se estudante também marcado, motorista só entra para itens fora mochila/fone)
-    if(state.isDriver){
-      if(state.isStudent){
-        let driverBase = 0;
-        items.forEach(({product, qty})=>{
-          const cat = (product.category||"").toLowerCase();
-          const isMochila = cat.includes("mochila");
-          const isFone = cat.includes("fone") || cat.includes("headphone") || cat.includes("audio");
-          if(!isMochila && !isFone) driverBase += (product.price||0) * qty;
-        });
-        discount += driverBase * 0.20;
-      }else{
-        discount += subtotal * 0.20;
-      }
-    }
+function checkout(){
+  const items = cartItems();
+  if (!items.length) return;
 
-    // Estudante 40% OFF em mochilas e fones
-    if(state.isStudent){
-      let studentBase = 0;
-      items.forEach(({product, qty})=>{
-        const cat = (product.category||"").toLowerCase();
-        const isMochila = cat.includes("mochila");
-        const isFone = cat.includes("fone") || cat.includes("headphone") || cat.includes("audio");
-        if(isMochila || isFone) studentBase += (product.price||0) * qty;
-      });
-      discount += studentBase * 0.40;
-    }
+  const { total, pix } = cartTotals();
 
-    discount = Math.min(discount, subtotal);
-    const total = Math.max(0, subtotal - discount + freight);
+  const lines = [];
+  lines.push("Olá! Vim pelo site da ZOE IMPORTADOS MT 🛍️");
+  lines.push("");
+  lines.push("🛒 Meu carrinho:");
+  items.forEach(({p, qty})=>{
+    lines.push(`• ${p.name} (x${qty}) — ${fmtBRL(p.price * qty)}`);
+  });
+  lines.push("");
+  lines.push(`💰 Total: ${fmtBRL(total)}`);
+  lines.push(`💸 Total no Pix (15% OFF): ${fmtBRL(pix)}`);
+  lines.push("");
+  lines.push("📍 Rua das Primaveras, 5138 — Jardim Primaveras — Sinop-MT");
+  lines.push("✅ Pode confirmar disponibilidade?");
 
-    return { items, subtotal, discount, freight, total };
-  }
+  const link = buildWhatsLink(lines.join("\n"));
+  window.open(link, "_blank", "noopener");
+}
 
-  // CRC16/CCITT-FALSE
-  function crc16(str){
-    let crc = 0xFFFF;
-    for(let c=0;c<str.length;c++){
-      crc ^= (str.charCodeAt(c) << 8);
-      for(let i=0;i<8;i++){
-        crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
-        crc &= 0xFFFF;
-      }
-    }
-    return crc.toString(16).toUpperCase().padStart(4,"0");
-  }
-  function emv(id, value){
-    const v = String(value);
-    return String(id).padStart(2,"0") + String(v.length).padStart(2,"0") + v;
-  }
-  function buildPixPayload(amount){
-    const amt = Number(amount||0).toFixed(2);
-    const gui = emv("00", "br.gov.bcb.pix");
-    const key = emv("01", PIX_KEY);
-    const mai = emv("26", gui + key);
+function productCard(p){
+  const old = p.oldPrice ? `<span class="old">${fmtBRL(p.oldPrice)}</span>` : "";
+  const hasCarousel = Array.isArray(p.images) && p.images.length > 1;
+  const carousel = hasCarousel ? `
+      <div class="carousel" data-carousel="${p.id}" data-index="0">
+        <img class="carousel__img" src="${p.images[0]}" alt="${p.name}">
+        <button class="carousel__btn prev" type="button" aria-label="Foto anterior" data-prev="${p.id}">‹</button>
+        <button class="carousel__btn next" type="button" aria-label="Próxima foto" data-next="${p.id}">›</button>
+        <div class="carousel__dots">
+          ${p.images.map((_,i)=>`<span class="carousel__dot ${i===0?'active':''}" data-dot="${p.id}" data-i="${i}"></span>`).join("")}
+        </div>
+      </div>
+  ` : `<img class="product__img" src="${p.image}" alt="${p.name}">`;
 
-    const base =
-      emv("00","01") +
-      emv("01","12") +
-      mai +
-      emv("52","0000") +
-      emv("53","986") +
-      emv("54", amt) +
-      emv("58","BR") +
-      emv("59", MERCHANT_NAME.slice(0,25)) +
-      emv("60", MERCHANT_CITY.slice(0,15)) +
-      emv("62", emv("05", "ZOE" + Date.now().toString().slice(-6)));
+  const note = p.note ? `<p class="product__desc"><strong>${p.note}</strong></p>` : "";
 
-    const without = base + "6304";
-    return without + crc16(without);
-  }
-
-  function renderProducts(){
-    const grid = $("#products");
-    if(!grid) return;
-    grid.classList.add("catalog_grid");
-    grid.innerHTML = "";
-
-    state.products.forEach(p=>{
-      const card = document.createElement("div");
-      card.className = "product_card";
-
-      const imgSrc = (p.images && p.images.length) ? p.images[0] : "assets/placeholder.jpg";
-      const hasCarousel = p.images && p.images.length > 1;
-
-      card.innerHTML = `
-        <img src="${imgSrc}" alt="${escapeHtml(p.name)}" loading="lazy" />
-        <div style="padding:12px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px;">
-            <h3 style="margin:0; font-size:16px; line-height:1.2;">${escapeHtml(p.name)}</h3>
-            <div style="font-weight:900; white-space:nowrap;">${money(p.price)}</div>
+  return `
+    <article class="product">
+      ${carousel}
+      <div class="product__body">
+        <div class="product__row">
+          <div><h3 class="product__name">${p.name}</h3></div>
+          <span class="tag">${p.tag || "Pronta entrega"}</span>
+        </div>
+        <p class="product__desc">${p.desc || ""}</p>
+        ${note}
+        <div class="product__row">
+          <div class="priceWrap">
+            <span class="price">${fmtBRL(p.price)}</span>${old}
           </div>
-          <div class="small" style="margin-top:6px;">${escapeHtml(p.description||"")}</div>
-          ${hasCarousel ? `<div class="small" style="margin-top:6px;">Toque na foto para ver mais ➜</div>` : ``}
-          <div style="display:flex; gap:8px; margin-top:10px; align-items:center;">
-            <button class="btn btn_primary" data-add="${p.id}">Adicionar</button>
-            <button class="btn" data-minus="${p.id}">-</button>
-            <div class="small" style="min-width:40px; text-align:center;" id="qty_${p.id}">${state.cart[p.id]||0}</div>
-            <button class="btn" data-plus="${p.id}">+</button>
+          <div class="actions">
+            <button class="btn primary" data-add="${p.id}">Adicionar</button>
           </div>
         </div>
-      `;
+      </div>
+    </article>
+  `;
+}
 
-      // carrossel simples no clique da imagem
-      const img = card.querySelector("img");
-      if(p.images && p.images.length > 1){
-        let idx = 0;
-        img.style.cursor = "pointer";
-        img.addEventListener("click", ()=>{
-          idx = (idx + 1) % p.images.length;
-          img.src = p.images[idx];
-        });
-      }
+function initCarousels(root){
+  const host = root || document;
+  const carousels = host.querySelectorAll("[data-carousel]");
+  carousels.forEach(c=>{
+    const id = c.dataset.carousel;
+    const p = state.products.find(x=>x.id===id);
+    if (!p || !Array.isArray(p.images) || p.images.length < 2) return;
 
-      grid.appendChild(card);
+    const img = c.querySelector("img");
+    const dots = Array.from(c.querySelectorAll("[data-dot]"));
+
+    const setIdx = (idx)=>{
+      const len = p.images.length;
+      const next = (idx + len) % len;
+      c.dataset.index = String(next);
+      img.src = p.images[next];
+      dots.forEach(d=> d.classList.toggle("active", parseInt(d.dataset.i,10)===next));
+    };
+
+    c.querySelector("[data-prev]")?.addEventListener("click", ()=> setIdx(parseInt(c.dataset.index,10)-1));
+    c.querySelector("[data-next]")?.addEventListener("click", ()=> setIdx(parseInt(c.dataset.index,10)+1));
+    dots.forEach(d=>{
+      d.addEventListener("click", ()=> setIdx(parseInt(d.dataset.i,10)));
     });
+  });
+}
 
-    // delegado (1 vez)
-    grid.addEventListener("click", (e)=>{
-      const add = e.target.closest("[data-add]");
-      const plus = e.target.closest("[data-plus]");
-      const minus = e.target.closest("[data-minus]");
-      if(add) changeQty(add.getAttribute("data-add"), 1);
-      if(plus) changeQty(plus.getAttribute("data-plus"), 1);
-      if(minus) changeQty(minus.getAttribute("data-minus"), -1);
-    }, { once:true });
 
-    updateAll();
-  }
 
-  function changeQty(id, delta){
-    state.cart[id] = Math.max(0, (state.cart[id]||0) + delta);
-    if(state.cart[id] === 0) delete state.cart[id];
-    saveCart();
-    updateAll();
-  }
+function renderHighlights(){
+  const host = el("highlights");
+  if (!host) return;
+  const highlights = state.products.filter(p=>p.highlight).slice(0,4);
+  host.innerHTML = highlights.map(productCard).join("");
+  initCarousels(host);
+  initCarousels(host);
+  host.querySelectorAll("[data-add]").forEach(btn=>{
+    btn.addEventListener("click", ()=> addToCart(btn.dataset.add));
+  });
+}
 
-  function renderCart(){
-    const totals = calcTotals();
+function renderCatalog(){
+  const host = el("catalog");
+  if (!host) return;
+  const filtered = state.filter==="todos" ? state.products : state.products.filter(p=>p.category===state.filter);
+  host.innerHTML = filtered.map(productCard).join("");
+  host.querySelectorAll("[data-add]").forEach(btn=>{
+    btn.addEventListener("click", ()=> addToCart(btn.dataset.add));
+  });
+}
 
-    const list = $("#cartItems");
-    if(list){
-      list.innerHTML = "";
-      if(totals.items.length === 0){
-        list.innerHTML = `<div class="small" style="padding:10px 0;">Seu carrinho está vazio 🙂</div>`;
-      }else{
-        totals.items.forEach(({product, qty})=>{
-          const row = document.createElement("div");
-          row.style.display="flex";
-          row.style.justifyContent="space-between";
-          row.style.gap="10px";
-          row.style.padding="10px 0";
-          row.style.borderBottom="1px solid rgba(255,255,255,.10)";
-          row.innerHTML = `
-            <div>
-              <div style="font-weight:800;">${escapeHtml(product.name)}</div>
-              <div class="small">${money(product.price)} x ${qty}</div>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <button class="btn" data-minus="${product.id}">-</button>
-              <div style="min-width:26px; text-align:center; font-weight:800;">${qty}</div>
-              <button class="btn" data-plus="${product.id}">+</button>
-            </div>
-          `;
-          list.appendChild(row);
-        });
-      }
-    }
+function renderCart(){
+  el("cartCount").textContent = cartCount().toString();
 
-    // totais (ids existentes)
-    if($("#subtotal")) $("#subtotal").textContent = money(totals.subtotal);
-    if($("#discounts")) $("#discounts").textContent = "- " + money(totals.discount);
-    if($("#freteTotal")) $("#freteTotal").textContent = money(totals.freight);
-    if($("#total")) $("#total").textContent = money(totals.total);
-    if($("#pixTotal")) $("#pixTotal").textContent = money(totals.total);
-    if($("#freteValue")) $("#freteValue").textContent = money(totals.freight);
+  const list = el("cartList");
+  const empty = el("cartEmpty");
+  const items = cartItems();
 
-    // QR Pix com valor total
-    const payload = buildPixPayload(totals.total);
+  if (!items.length){
+    empty.style.display = "block";
+    list.innerHTML = "";
+  } else {
+    empty.style.display = "none";
+    list.innerHTML = items.map(({p, qty})=>`
+      <div class="cartItem">
+        <img src="${p.image}" alt="${p.name}">
+        <div class="cartItem__info">
+          <div class="cartItem__name">${p.name}</div>
+          <div class="cartItem__meta">${fmtBRL(p.price)} • ${p.tag || ""}</div>
+        </div>
+        <div class="qty">
+          <button data-q="${p.id}" data-d="-1">−</button>
+          <span>${qty}</span>
+          <button data-q="${p.id}" data-d="1">+</button>
+        </div>
+      </div>
+    `).join("");
 
-    const img = $("#pixQrImg");
-    if(img){
-      img.src = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" + encodeURIComponent(payload);
-      img.alt = "QR Code Pix - Total " + money(totals.total);
-    }
-    const copia = $("#pixCopiaCola");
-    if(copia) copia.value = payload;
-
-    // badge no botão flutuante
-    const count = totals.items.reduce((a,b)=>a+b.qty,0);
-    const badge = $("#cartBadge");
-    if(badge) badge.textContent = String(count);
-
-    return totals;
-  }
-
-  function updateAll(){
-    Object.keys(state.cart).forEach(id=>{
-      const el = $("#qty_"+id);
-      if(el) el.textContent = String(state.cart[id]||0);
-    });
-    $all('[id^="qty_"]').forEach(el=>{
-      const id = el.id.replace("qty_","");
-      if(!state.cart[id]) el.textContent = "0";
-    });
-    renderCart();
-  }
-
-  function buildWhatsMessage(totals){
-    const lines = [];
-    lines.push("🛍️ *Pedido - Zoe Importados MT*");
-    lines.push("");
-    totals.items.forEach(({product, qty})=>{
-      lines.push(`• ${qty}x ${product.name} — ${money(product.price * qty)}`);
-    });
-    lines.push("");
-    lines.push(`Subtotal: ${money(totals.subtotal)}`);
-    lines.push(`Descontos (Pix 15% OFF + regras): -${money(totals.discount)}`);
-    lines.push(`Frete: ${money(totals.freight)} (R$ 1,50/km)`);
-    lines.push(`*Total: ${money(totals.total)}*`);
-    lines.push("");
-    lines.push("📍 *Entrega*");
-    if(state.address) lines.push("Endereço: " + state.address);
-    if(state.km) lines.push("Distância: " + state.km + " km");
-    lines.push("");
-    lines.push("✅ Quero finalizar a compra!");
-    return lines.join("\n");
-  }
-
-  function bindUI(){
-    // descontos
-    const driver = $("#discountDriver");
-    const student = $("#discountStudent");
-    if(driver) driver.addEventListener("change", ()=>{ state.isDriver = driver.checked; updateAll(); });
-    if(student) student.addEventListener("change", ()=>{ state.isStudent = student.checked; updateAll(); });
-
-    // frete
-    const addr = $("#address");
-    const km = $("#km");
-    if(addr) addr.addEventListener("input", ()=>{ state.address = addr.value; updateAll(); });
-    if(km) km.addEventListener("input", ()=>{
-      state.km = Number(String(km.value).replace(",","."));
-      updateAll();
-    });
-
-    // carrinho (controles)
-    const list = $("#cartItems");
-    if(list){
-      list.addEventListener("click",(e)=>{
-        const plus = e.target.closest("[data-plus]");
-        const minus = e.target.closest("[data-minus]");
-        if(plus) changeQty(plus.getAttribute("data-plus"), 1);
-        if(minus) changeQty(minus.getAttribute("data-minus"), -1);
+    list.querySelectorAll("[data-q]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const id = btn.dataset.q;
+        const d = parseInt(btn.dataset.d, 10);
+        updateQty(id, d);
       });
-    }
-
-    // finalizar
-    const btn = $("#whatsBtn");
-    if(btn) btn.addEventListener("click", ()=>{
-      const totals = calcTotals();
-      if(totals.items.length === 0){
-        alert("Seu carrinho está vazio 🙂");
-        return;
-      }
-      const msg = buildWhatsMessage(totals);
-      window.open("https://wa.me/"+WHATS_NUMBER+"?text="+encodeURIComponent(msg), "_blank");
     });
-
-    // botão flutuante: rolar até carrinho
-    const floatBtn = $("#openCartFloat");
-    if(floatBtn){
-      floatBtn.addEventListener("click", ()=>{
-        const cart = document.querySelector("#cartItems") || document.querySelector("#checkout") || document.querySelector(".catalog");
-        if(cart) cart.scrollIntoView({behavior:"smooth", block:"start"});
-      });
-    }
-
-    // copiar pix
-    const copyBtn = $("#copyPix");
-    if(copyBtn){
-      copyBtn.addEventListener("click", ()=>{
-        const copia = $("#pixCopiaCola");
-        if(!copia) return;
-        copia.select();
-        copia.setSelectionRange(0, 99999);
-        document.execCommand("copy");
-        copyBtn.textContent = "Copiado!";
-        setTimeout(()=>copyBtn.textContent="Copiar Pix", 1200);
-      });
-    }
   }
 
-  function boot(){
-    bindUI();
+  const { total, pix } = cartTotals();
+  el("total").textContent = fmtBRL(total);
+  el("totalPix").textContent = fmtBRL(pix);
+}
 
-    fetch("products.json?v="+Date.now())
-      .then(r=>r.json())
-      .then(data=>{
-        state.products = Array.isArray(data) ? data : [];
-        renderProducts();
-        updateAll();
-      })
-      .catch(err=>{
-        console.error("Erro ao carregar produtos:", err);
-        const grid = $("#products");
-        if(grid) grid.innerHTML = "<div class='product_card' style='padding:14px;'>Não foi possível carregar os produtos.</div>";
-      });
-  }
+async function init(){
+  const y = el("year");
+  if (y) y.textContent = new Date().getFullYear().toString();
 
-  document.addEventListener("DOMContentLoaded", boot);
-})();
+  el("menuBtn")?.addEventListener("click", ()=> openNavIfMobile(!el("nav").classList.contains("is-open")));
+  el("cartBtn")?.addEventListener("click", ()=> openDrawer(true));
+  el("closeCart")?.addEventListener("click", ()=> openDrawer(false));
+  el("backdrop")?.addEventListener("click", ()=> openDrawer(false));
+
+  document.querySelectorAll(".chip").forEach(btn=>{
+    btn.addEventListener("click", ()=> setFilter(btn.dataset.filter));
+  });
+  document.querySelectorAll(".linkBtn").forEach(btn=>{
+    btn.addEventListener("click", ()=> setFilter(btn.dataset.filter));
+  });
+
+  const msg = "Olá! Quero comprar na ZOE IMPORTADOS MT 🛍️";
+  const link = buildWhatsLink(msg);
+  el("whatsHero").href = link;
+  el("whatsAbout").href = link;
+  el("floatWhats").href = link;
+
+  const res = await fetch("products.json", { cache: "no-store" });
+  state.products = await res.json();
+
+  loadCart();
+
+  renderHighlights();
+  renderCatalog();
+  renderCart();
+
+  el("checkout")?.addEventListener("click", checkout);
+  el("clear")?.addEventListener("click", clearCart);
+}
+
+init().catch(err=>{
+  console.error(err);
+  alert("Erro ao carregar produtos. Verifique se products.json está no repositório.");
+});

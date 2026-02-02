@@ -1,311 +1,252 @@
 [
   {
     "id": "smartwatch-m9",
-    "name": "Smartwatch M9",
+    "name": "⌚ Smartwatch M9",
     "price": 189.9,
-    "category": "relogios",
-    "images": [
-      "assets/arte-smartwatch.jpg"
-    ],
-    "description": "Tecnologia, estilo e praticidade no seu pulso."
+    "category": "smartwatch",
+    "tag": "Tecnologia no pulso",
+    "desc": "Monitore atividades, receba notificações e fique sempre conectado.",
+    "image": "assets/smartwatch-m9.jpg",
+    "highlight": true
   },
   {
-    "id": "relogio-digital",
-    "name": "Relógio Digital LED (Oferta)",
-    "price": 79.9,
-    "originalPrice": 129.9,
-    "category": "relogios",
-    "images": [
-      "assets/relogio-digital.jpg",
-      "assets/relogio-digital-2.webp"
-    ],
-    "description": "Relógio digital esportivo, confortável e resistente. Oferta por tempo limitado."
-  },
-  {
-    "id": "luminaria-lua",
-    "name": "Luminária Lua",
+    "id": "luminaria-lua-umidificador",
+    "name": "🌕 Luminária Lua Grande + Umidificador",
+    "note": "De R$ 89,90 por R$ 59,90",
     "price": 59.9,
-    "category": "decor",
-    "images": [
-      "assets/lua-umidificador.jpg"
-    ],
-    "description": "Luminária temática para decorar seu ambiente."
+    "oldPrice": 89.9,
+    "category": "iluminacao",
+    "tag": "Sucesso de vendas",
+    "desc": "Decora, ilumina e umidifica o ambiente. Ideal para quartos, salas e presentes.",
+    "image": "assets/luminaria-lua.jpg",
+    "highlight": true
   },
   {
-    "id": "umidificador-astronauta",
-    "name": "Umidificador Astronauta (Mega Oferta)",
-    "price": 59.9,
-    "originalPrice": 129.9,
-    "category": "decor",
-    "images": [
-      "assets/SaveClip.App_617398552_17858356845594529_5367524789386729616_n.jpg",
-      "assets/SaveClip.App_614582877_17858356854594529_3890824448854941767_n.jpg",
-      "assets/SaveClip.App_612407789_17858356869594529_8488093288935078756_n.jpg"
-    ],
-    "description": "Decoração, bem-estar e luzes do universo no seu quarto!"
-  },
-  {
-    "id": "projetor-estrelas-astronauta",
-    "name": "Projetor de Estrelas Astronauta (Oferta)",
-    "price": 100.0,
-    "originalPrice": 159.9,
-    "category": "decor",
-    "images": [
-      "assets/projetor-astronauta.jpg"
-    ],
-    "description": "Projeção de estrelas e nebulosas. Perfeito para quarto, festa e relaxar."
-  },
-  {
-    "id": "camera-seguranca-360",
-    "name": "Câmera de Segurança Wi‑Fi 360° (Externa/Interna)",
-    "price": 359.9,
-    "category": "seguranca",
-    "images": [
-      "assets/camera-seguranca-360.jpg"
-    ],
-    "description": "Câmera de segurança interna e externa, rotação 360°, visão noturna. Proteção para seu lar.",
-    "promoPrice": null,
-    "tag": "PROTEÇÃO"
-  },
-  {
-    "id": "mochila-feminina-couro",
-    "name": "Mochila Feminina Couro (Oferta)",
-    "price": 99.9,
-    "originalPrice": 139.9,
+    "id": "mochila-usb-reforcada",
+    "name": "🎒 Mochila Reforçada com USB",
+    "price": 149.9,
     "category": "mochilas",
+    "tag": "Resistência + USB",
+    "desc": "Reforço total para o dia a dia e entrada USB para carregar o celular.",
+    "image": "assets/mochila-usb.jpg",
+    "highlight": true
+  },
+  {
+    "id": "microfone-lapela-inova-mic-7427",
+    "name": "🎤 Microfone de Lapela INOVA MIC-7427",
+    "price": 49.9,
+    "oldPrice": 99.9,
+    "category": "acessorios",
+    "tag": "50% OFF",
+    "desc": "Para PC, celular, filmadora, gravações de áudio e DSLR. Baixo ruído de manuseio. Inclui clipe de lapela. Ideal para vídeos.",
+    "note": "Itens inclusos: 1 Microfone MIC-7427 • 1 Adaptador P3 x P10 • 1 Bateria LR44",
+    "image": "assets/microfone-mic7427-1.jpg",
     "images": [
-      "assets/mochila-feminina.png"
+      "assets/microfone-mic7427-1.jpg",
+      "assets/microfone-mic7427-2.webp",
+      "assets/microfone-mic7427-3.webp"
     ],
-    "description": "Mochila feminina estilo couro. Oferta especial."
+    "highlight": true
+  },
+  {
+    "id": "bracelete-preto-esportivo-m9",
+    "name": "⌚ Bracelete Preto Esportivo (M9)",
+    "price": 39.9,
+    "category": "acessorios",
+    "tag": "Confortável",
+    "desc": "Pulseira/bracelete esportivo compatível com smartwatch M9. Leve, resistente e confortável.",
+    "image": "assets/bracelete-preto-esportivo.jpg",
+    "highlight": false
+  },
+  {
+    "id": "copo-termico",
+    "name": "☕ Copo Térmico",
+    "price": 39.9,
+    "category": "casa",
+    "tag": "Térmico",
+    "desc": "Consulte cores disponíveis.",
+    "image": "assets/ph-casa.jpg"
+  },
+  {
+    "id": "carregador-iphone-20w",
+    "name": "⚡ Carregador iPhone 20W + Cabo",
+    "price": 89.9,
+    "category": "acessorios",
+    "tag": "Turbo",
+    "desc": "Carregador 20W com cabo (USB-C para Lightning). Ideal para carga rápida.",
+    "image": "assets/carregador-iphone-20w.jpg",
+    "highlight": false
+  },
+  {
+    "id": "led-colorido",
+    "name": "🌕 LED Colorido",
+    "price": 59.9,
+    "category": "iluminacao",
+    "tag": "RGB",
+    "desc": "Iluminação LED/RGB. Consulte modelos.",
+    "image": "assets/luminaria-lua.jpg"
+  },
+  {
+    "id": "ring-light-pro",
+    "name": "🌕 Ring Light Profissional",
+    "price": 229.9,
+    "category": "iluminacao",
+    "tag": "Profissional",
+    "desc": "Iluminação para fotos e vídeos. Consulte tamanhos.",
+    "image": "assets/luminaria-lua.jpg"
+  },
+  {
+    "id": "chaveiros",
+    "name": "🎁 Chaveiros e Itens Decorativos",
+    "price": 19.9,
+    "category": "diversos",
+    "tag": "Detalhes",
+    "desc": "Chaveiros e pequenos itens decorativos.",
+    "image": "assets/ph-diversos.jpg"
+  },
+  {
+    "id": "pelucia",
+    "name": "🎁 Pelúcias Variadas",
+    "price": 29.9,
+    "category": "diversos",
+    "tag": "Presentes",
+    "desc": "Ursos e pelúcias variadas. Consulte opções.",
+    "image": "assets/ph-diversos.jpg"
+  },
+  {
+    "id": "mochila-feminina",
+    "name": "🎒 Mochila Feminina",
+    "price": 139.9,
+    "category": "mochilas",
+    "tag": "Estilo",
+    "desc": "Consulte cores e modelos disponíveis.",
+    "image": "assets/mochila-usb.jpg"
+  },
+  {
+    "id": "mochila-tradicional",
+    "name": "🎒 Mochila Tradicional",
+    "price": 129.9,
+    "category": "mochilas",
+    "tag": "Dia a dia",
+    "desc": "Consulte cores e modelos disponíveis.",
+    "image": "assets/mochila-usb.jpg"
+  },
+  {
+    "id": "mochila-usb",
+    "name": "🎒 Mochila USB (entrada USB)",
+    "price": 159.9,
+    "category": "mochilas",
+    "tag": "Entrada USB",
+    "desc": "Entrada USB para carregar o celular.",
+    "image": "assets/mochila-usb.jpg"
+  },
+  {
+    "id": "caixa-som-rgb",
+    "name": "🎧 Caixa de Som RGB",
+    "price": 139.9,
+    "category": "som",
+    "tag": "Luzes RGB",
+    "desc": "Som + luzes coloridas. Consulte modelos.",
+    "image": "assets/fone.jpg"
   },
   {
     "id": "fone-ouvido",
-    "name": "Fone de Ouvido",
+    "name": "🎧 Fone de Ouvido",
     "price": 39.9,
-    "category": "fones",
-    "images": [
-      "assets/fone-ouvido.jpg"
-    ],
-    "description": "Fone prático para o dia a dia."
+    "category": "som",
+    "tag": "Dia a dia",
+    "desc": "Consulte modelos e cores disponíveis.",
+    "image": "assets/fone.jpg"
+  },
+  {
+    "id": "receptor-bluetooth-usb-aux",
+    "name": "🔊 Receptor Bluetooth USB/AUX",
+    "price": 29.9,
+    "oldPrice": null,
+    "category": "acessorios",
+    "tag": "Prático",
+    "desc": "Transforme seu som em Bluetooth. Conecta via USB e P2 (AUX). Ideal para carro, caixa de som e som residencial.",
+    "note": "Acompanha cabo P2.",
+    "image": "assets/bluetooth-receptor.jpg",
+    "highlight": false
+  },
+  {
+    "id": "carregador-cabo-tipo-c-50w",
+    "name": "🔌 Carregador + Cabo Tipo‑C 50W Turbo (H’Maston)",
+    "price": 39.9,
+    "category": "acessorios",
+    "tag": "50W Turbo",
+    "desc": "Carregamento rápido (conforme compatibilidade).",
+    "image": "assets/ph-acessorios.jpg"
+  },
+  {
+    "id": "kit-carregador-lehmox-micro-usb",
+    "name": "🔌 Kit Carregador LEHMOX (Micro USB) 3.1A",
+    "price": 29.9,
+    "category": "acessorios",
+    "tag": "Anatel",
+    "desc": "Carregador + cabo Micro USB. Saída 3.1A para carregar mais rápido no dia a dia.",
+    "image": "assets/carregador-lehmox-micro.jpg",
+    "highlight": false
+  },
+  {
+    "id": "relogio-pulso",
+    "name": "🕰️ Relógio de Pulso (analógico/digital)",
+    "price": 129.9,
+    "category": "relogios",
+    "tag": "Variedade",
+    "desc": "Consulte modelos disponíveis.",
+    "image": "assets/ph-relogios.jpg"
+  },
+  {
+    "id": "camera-lampada",
+    "name": "🛡️ Câmera Lâmpada",
+    "price": 100.0,
+    "category": "seguranca",
+    "tag": "2 em 1",
+    "desc": "Câmera em formato de lâmpada. Consulte detalhes.",
+    "image": "assets/ph-seguranca.jpg"
+  },
+  {
+    "id": "camera-seguranca",
+    "name": "🛡️ Câmera de Segurança",
+    "price": 249.9,
+    "category": "seguranca",
+    "tag": "Segurança",
+    "desc": "Consulte modelos e instalação.",
+    "image": "assets/ph-seguranca.jpg"
   },
   {
     "id": "bone-country",
-    "name": "Bonés Country (TXC / Texas Farm) - Oferta",
+    "name": "🧢 Boné Country",
     "price": 49.9,
-    "originalPrice": 89.9,
-    "category": "acessorios",
-    "images": [
-      "assets/bone-country.jpg"
-    ],
-    "description": "Vários modelos. Oferta limitada."
-  },
-  {
-    "id": "receptor-bluetooth-usb-p2",
-    "name": "Receptor Bluetooth USB/P2",
-    "price": 29.9,
-    "category": "acessorios",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Transforme seu som em Bluetooth. Ideal para carro e caixas de som."
-  },
-  {
-    "id": "chaveiro-stitch-3d",
-    "name": "Chaveiro Stitch 3D (6cm x 6cm)",
-    "price": 19.9,
-    "category": "chaveiros",
-    "images": [
-      "assets/chaveiro-stitch.jpg"
-    ],
-    "description": "Robusto, lindo e perfeito para chave, mochila e presente."
-  },
-  {
-    "id": "chaveiro-capivara",
-    "name": "Chaveiro Capivara",
-    "price": 19.9,
-    "category": "chaveiros",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Modelos variados. Foto em breve."
-  },
-  {
-    "id": "pelucias-diversas",
-    "name": "Pelúcias Diversas",
-    "price": 29.9,
-    "category": "pelucias",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Modelos variados. Foto em breve."
-  },
-  {
-    "id": "cartao-memoria-16gb",
-    "name": "Cartão de Memória MasterDrive 16 GB",
-    "price": 59.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/cartao-memoria-16gb.jpg"
-    ],
-    "description": "Cartão de memória com adaptador."
-  },
-  {
-    "id": "cartao-memoria-8gb",
-    "name": "Cartão de Memória MasterDrive 8 GB",
-    "price": 45.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/cartao-memoria-8gb.webp"
-    ],
-    "description": "Cartão de memória com adaptador."
-  },
-  {
-    "id": "bracelete-preto-esportivo",
-    "name": "Bracelete Preto Esportivo",
-    "price": 49.9,
-    "category": "acessorios",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Pulseira/bracelete esportivo preto."
-  },
-  {
-    "id": "carregador-tipo-c",
-    "name": "Carregador Tipo C",
-    "price": 49.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Carregador Tipo C. Foto em breve."
-  },
-  {
-    "id": "carregador-iphone",
-    "name": "Carregador iPhone",
-    "price": 59.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Carregador iPhone. Foto em breve."
-  },
-  {
-    "id": "controle-universal",
-    "name": "Controle Universal",
-    "price": 39.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/products/controle-universal.jpg"
-    ],
-    "description": "Controle universal para TV/Smart TV (vários modelos).",
-    "promoPrice": null
-  },
-  {
-    "id": "powerbank-itblue-20000",
-    "name": "Power Bank It‑Blue 20.000mAh (Oferta)",
-    "price": 229.9,
-    "originalPrice": 229.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/products/powerbank-itblue-20000.jpg"
-    ],
-    "description": "Power bank IT‑BLUE 20.000mAh. Prático para o dia a dia.",
-    "promoPrice": 159.9,
-    "tag": "OFERTA"
-  },
-  {
-    "id": "oculos-corrida-espelhado",
-    "name": "Óculos Corrida Esportivo Espelhado (Oferta)",
-    "price": 89.9,
-    "originalPrice": 89.9,
-    "category": "acessorios",
-    "images": [
-      "assets/products/oculos-corrida-espelhado.jpg"
-    ],
-    "description": "Óculos esportivo espelhado para corrida/ciclismo.",
-    "promoPrice": 69.9,
-    "tag": "OFERTA"
-  },
-  {
-    "id": "oculos-branco-espelhado",
-    "name": "Óculos Branco Esportivo Espelhado (Oferta)",
-    "price": 89.9,
-    "originalPrice": 89.9,
-    "category": "acessorios",
-    "images": [
-      "assets/products/oculos-branco-espelhado.jpg"
-    ],
-    "description": "Óculos esportivo espelhado com detalhes brancos.",
-    "promoPrice": 69.9,
-    "tag": "OFERTA"
+    "category": "moda",
+    "tag": "Country",
+    "desc": "Consulte modelos disponíveis.",
+    "image": "assets/ph-moda.jpg"
   },
   {
     "id": "perfume-good-girl",
-    "name": "Perfume Importado Good Girl",
+    "name": "🧴 Perfume Importado Good Girl (Sapatinho)",
     "price": 129.9,
     "category": "perfumes",
-    "images": [
-      "assets/products/perfume-good-girl-preto.jpg",
-      "assets/products/perfume-good-girl-claro.jpg"
-    ],
-    "description": "Perfume feminino importado (inspirado Good Girl). Fixação prolongada.",
-    "promoPrice": 70.0,
-    "tag": "OFERTA"
+    "tag": "Importado",
+    "desc": "Consulte disponibilidade.",
+    "image": "assets/ph-perfumes.jpg"
   },
   {
-    "id": "teclado-gamer-rgb",
-    "name": "Teclado Gamer RGB (Oferta)",
-    "price": 169.9,
-    "originalPrice": 169.9,
-    "category": "eletronicos",
+    "id": "pelucia-capivara-chaveiro",
+    "name": "🧸 Pelúcia Capivara (Chaveiro)",
+    "price": 29.9,
+    "category": "diversos",
+    "tag": "Fofo demais",
+    "desc": "Pelúcia capivara estilo chaveiro. Ótima para presente e decoração.",
+    "image": "assets/capivara-pelucia-1.jpg",
     "images": [
-      "assets/products/teclado-gamer-rgb.jpg"
+      "assets/capivara-pelucia-1.jpg",
+      "assets/capivara-pelucia-2.jpg",
+      "assets/capivara-pelucia-3.jpg"
     ],
-    "description": "Teclado gamer single hand com iluminação RGB.",
-    "promoPrice": 139.9,
-    "tag": "OFERTA"
-  },
-  {
-    "id": "caixa-som-roda-azul",
-    "name": "Caixa de Som Roda Azul (Oferta)",
-    "price": 159.9,
-    "originalPrice": 159.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/products/caixa-som-roda-azul.jpg"
-    ],
-    "description": "Caixa de som estilo roda (wireless). Som potente e design diferente.",
-    "promoPrice": 125.0,
-    "tag": "OFERTA"
-  },
-  {
-    "id": "ring-light-pequeno",
-    "name": "Ring Light Pequeno",
-    "price": 159.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Iluminação profissional. Foto em breve."
-  },
-  {
-    "id": "ring-light-medio",
-    "name": "Ring Light Médio",
-    "price": 250.0,
-    "category": "eletronicos",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Iluminação profissional. Foto em breve."
-  },
-  {
-    "id": "ring-light-extra-grande",
-    "name": "Ring Light Extra Grande",
-    "price": 359.9,
-    "category": "eletronicos",
-    "images": [
-      "assets/placeholder.png"
-    ],
-    "description": "Iluminação profissional. Foto em breve."
+    "highlight": false
   }
 ]
